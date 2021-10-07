@@ -1,19 +1,55 @@
 ul {
-
+    margin: 0;
+    padding: 0;
+    background-color: blue;
+    list-style-type: none;
+    overflow: hidden;
 }
 
 li {
-
+    float: left;
 }
 
 li a {
-
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 20px;
 }
 
 li:hover {
-
+    background-color: aquamarine;
 }
 
 * {
     box-sizing: border-box;
+}
+
+.header {
+    padding: 30px;
+    font-size: 50px;
+    text-align: center;
+    background-image: url(../resources/james-lee-insxJlCgpY4-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+}
+
+.footer {
+    padding: 30px;
+    margin-top: 50px;
+    min-height: 100px;
+    text-align: center;
+    background-image: url(../resources/james-lee-insxJlCgpY4-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.game {
+    margin: 50px;
+    min-height: 500px;
+    background-color: grey;
 }
