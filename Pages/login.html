@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Question 1</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="login.css" />
+
+    <!-- STYLE STUFF -->
+    <style>
+
+        .fortycol {
+          width: 35%;
+        }
+    
+        .sixtycol {
+          width: 65%;
+          float:right;
+        }
+  
+        .coolimg {
+          border: 20px solid rgba(46, 109, 49, 0.3);
+          border-radius: 30%;
+        }
+  
+        .padtop{
+          padding-top: 3%
+        }
+  
+        .padbot{
+          padding-bottom: 1%
+        }
+  
+        .bluebg{
+          background-color: rgb(108, 136, 158)
+        }
+
+        .orangebg{
+          background-color: rgb(243, 186, 112)
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .brand-centered {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .logincontainer{
+            width:25%;
+        }
+
+        .loginwidth{
+            width:5%;
+        }
+
+        .slightrounded{
+            border-radius:20%;
+        }
+  
+      </style>
+  
+  </head>
+
+  <body>
+    
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg bluebg navbar-light">
+
+        <div class="collapse navbar-collapse" id="navbarText">
+  
+            <ul class="navbar-nav mr-auto">
+  
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+  
+            <li class = "nav-item">
+                <a class="nav-link" href="#">Login</a>
+            </li>
+
+            </ul>
+
+            <div class="collapse navbar-collapse navbar-brand brand-centered">
+
+            <img class="bluebg rounded-circle"
+            src="./img/brain.png"
+            alt="website icon"
+            id="icon"
+            width="150px"
+            >
+
+            </div>
+          
+
+        </div>
+
+        
+        
+        <!-- Right button on NavBar: purpose to be implented
+        <div class="form-inline my-2 my-lg-0">
+            <a href="#" class="btn">
+          <button class="btn btn-default">
+              <img class="rounded-circle" src="" alt="" width="30" height="30">
+          </button>
+          </a>
+      </div>
+      -->
+
+    </nav>
+
+
+    <br /><br /><br /><br />
+
+    <div class="container">
+
+    </div>
+
+    <!--- Log In Form-->
+
+    <!--
+    <div class="container orangebg logincontainer">
+        <img class="center" src="./img/cooltext394869447794294.png" width=200px>
+    </div>
+    -->
+    
+    <div class="container orangebg logincontainer slightrounded">
+
+        <img class="center" src="./img/cooltext394869447794294.png" width=200px>
+
+        <div class="form-group row">
+            
+
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="userName" style="font-family:verdana"
+              >Username</label
+            >
+            <div class="col-sm-6">
+              <input
+                type="name"
+                class="form-control"
+                name="userName"
+                id="userName"
+                placeholder="Username"
+              />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="passwordConfirm" style="font-family:verdana"
+              >Password</label
+            >
+            <div class="col-sm-6">
+              <input
+                type="password"
+                class="form-control"
+                id="passwordConfirm"
+                name="passwordConfirm"
+                placeholder="Password"
+              />
+            </div>
+        </div>
+        
+    
+    </div>
+
+    
+
+    <div class="container bluebg logincontainer pt-2 slightrounded">
+  
+        <div class="row ">
+            <div class="col-sm-2">
+                
+            </div>
+            <div class="col-sm-3">
+                <h5>New?</h5>
+            </div>
+
+            <div class="col-sm-6">
+                <a class="pt-2 text-warning"
+                href="#myModal"
+                class="btn btn-info"
+                data-toggle="modal"
+                onclick="openModal()"
+                >Click to Sign Up</a>
+            </div>    
+        </div>
+        
+    
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog modal-login">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="avatar">
+              <img
+                src="./img/brain.png"
+                alt="iconsignup"
+              />
+            </div>
+            <h4 class="modal-title">Sign Up</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                placeholder="Username"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                id="psw"
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Password"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                id="cpsw"
+                type="password"
+                class="form-control"
+                name="confirm password"
+                placeholder="Confirm Password"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <button
+                id="my_submit_button"
+                class="btn btn-primary btn-block login-btn"
+                disabled
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div id="message" style="display: block">
+              <h3>Password must contain the following:</h3>
+              <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+              <p id="capital" class="invalid">
+                A <b>capital (uppercase)</b> letter
+              </p>
+              <p id="number" class="invalid">A <b>number</b></p>
+              <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+              <p id="match" class="invalid">
+                Password and Confirm Password Match
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+
+  </body>
+</html>
+
+<script src="./js/login.js"></script>
+
