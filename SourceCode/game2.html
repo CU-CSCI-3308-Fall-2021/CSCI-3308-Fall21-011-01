@@ -33,7 +33,7 @@
     <h3>3. If you get a problem wrong, a try again message will display across the screen. You will not get to move on to the next problem until you have answered the problem correctly.</h3>
     <h3>4. In order to check your answer, you must click the check button on the screen.</h3>
     
-    <div class="container" id="game">
+    <div class="jumbotron" id="game">
         <p id="some_div"></p>
         <table class = "center">
             <tr>
@@ -64,16 +64,15 @@
             </tr>
         </table>
         <p><button class="restart" id="restart-btn" onclick="runGame()">Restart</button></p>
+        <p align = "margin-right" id="next"><button class="next" id="next-btn" onclick="nextLevel()">Next Level</button></p>
     </div>
     
     <p>
         <button class="start btn" id="start-btn" onclick="showGame('game', 1); runGame();">Start!</button>
     </p>
 
-    <div class = "container" id="next">
-        <p align = "margin-right">
-            <button class="next" id="next-btn" onclick="nextLevel()">Next Level</button>
-        </p>
+    <div class = "container">
+        
     </div>
 
    
