@@ -8,7 +8,7 @@ var x;
 var y;
 // array of problems (0-19)
 const problems = [
-    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,22,25,28,33,42
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
 ]
 // show game
 function showGame(id, toggle){
@@ -34,7 +34,7 @@ function countdown() {
         showGame('game', 0);
         checkNext();
         timeLeft = -3;
-        showGame('game',1);
+        // showGame('game',1);
         //clearTimeout(timerId);
     } 
     else {
@@ -45,12 +45,14 @@ function countdown() {
 }
 //run game function
 function runGame(){
+    showGame('game',1);
     //console.log("run game");
     timeLeft = 30;
     countdown();
     levelScore = 0;
     document.getElementById("levelScore").innerHTML = 0;
-    document.getElementById("gameScore").innerHTML = 0;
+    document.getElementById("gameScore").innerHTML = gameScore;
+    document.getElementById("currLevel").innerHTML = Level;
     loadProblem(Level);
     
 }
@@ -79,8 +81,8 @@ function loadProblem(Level){
     }
     else if (Level == 3){
         // load problem from indexes 10-19
-        x = getRandomInt(9,19);
-        y = getRandomInt(9,19);
+        x = getRandomInt(9,20);
+        y = getRandomInt(9,20);
     }
     // calculate the solution and display the digits and math symbol on the screen
     switch(mathSymbol){
@@ -162,13 +164,14 @@ function checkNext(){
             showGame('restart-btn', 1);
         }
         else{
+            alert("Congratulations! You passed level " + Level);
             showGame('next-btn', 1);
             showGame('restart-btn', 1);
         }
     }
     else{
         showGame('restart-btn', 1);
-        alert("You needed " + (Level*15 - levelScore) + " more points to get to the next level.");
+        alert("You needed " + (Level*15 - levelScore) + " more points to pass the level.");
         
     }
 }
