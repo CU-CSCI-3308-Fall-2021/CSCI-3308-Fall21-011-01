@@ -20,7 +20,7 @@ function Question(level, question, answer, wrong1, wrong2, wrong3){
 //all level one questions
 var level1 = [
     new Question ('1', 'If Jamie has three apples and gives two of them away, how many apples does she have?', '1', '2', '3', '4')
-    new Question ('1', 'If Vix has five potions and he buys three more, how many potions does he have?', '8', '2', '5', '3')
+    //new Question ('1', 'If Vix has five potions and he buys three more, how many potions does he have?', '8', '2', '5', '3')
 ]
 
 /*
@@ -34,9 +34,10 @@ function gameTimer(){
 }
 */
 
+//timer function
 var timer = document.getElementById('time');
 var timerID = setInterval(countDown, 1000);
-var current_time = 6 * 60;
+var current_time = 5 * 60;
 var min;
 var sec;
 
@@ -49,10 +50,11 @@ function countDown(){
         {
             min = Math.floor(current_time / 60);
             sec = current_time % 60;
-            timer.innerHTML = min + ':' + sec;
+            timer.innerHTML =  min + ':' + sec;
             current_time--;
         }
 }
+///
 
 
 
