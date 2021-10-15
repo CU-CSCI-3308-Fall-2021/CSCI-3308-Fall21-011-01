@@ -67,6 +67,15 @@ body{
     width: 0%;
 }
 
+.timer {
+    width: 20rem;
+    height: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    overflow: hidden;
+}
+
 @media screen and (max-width:760px){
     .choice-container{
         min-width: 40rem;
