@@ -1,5 +1,5 @@
-question = document.querySelector('#question');
-choices = Array.from(document.querySelectorAll('.choice-text'));// gets an array of all the choices
+const question = document.querySelector('#question');
+const choices = Array.from(document.querySelectorAll('.choice-text'));// gets an array of all the choices
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
@@ -71,6 +71,11 @@ getNewQuestion = () => {
     const questionsIndex = Math.floor(Math.random() = availableQuestions.length) // randomly selects the question to prompted 
     currentQuestion = availableQuestions[questionsIndex]
     question.innerHTML = currentQuestion.question // this should display the actual question
+
+    choices.forEach(choice => {
+        const number = choice.dataset['number']
+        choice.innerText = currentQuestion['choice' + number]
+    })
 
     availableQuestions.splice(questionsIndex, 1) // update the available questions
 
