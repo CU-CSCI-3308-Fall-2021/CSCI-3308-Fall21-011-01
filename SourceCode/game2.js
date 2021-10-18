@@ -32,6 +32,7 @@ function countdown() {
     }
     else if (timeLeft == -1) {
         showGame('game', 0);
+        showGame('contain', 1);
         checkNext();
         timeLeft = -3;
         // showGame('game',1);
@@ -45,7 +46,10 @@ function countdown() {
 }
 //run game function
 function runGame(){
+    document.getElementById("answer").value = '';
     showGame('game',1);
+    showGame('restart-btn', 1);
+    showGame('contain', 1);
     //console.log("run game");
     timeLeft = 30;
     countdown();
@@ -181,6 +185,7 @@ function nextLevel(){
     gameScore += levelScore;
     showGame('game', 1);
     showGame('next-btn', 0);
+    showGame('contain', 1);
     runGame();
     document.getElementById("gameScore").innerHTML = gameScore;
 }
