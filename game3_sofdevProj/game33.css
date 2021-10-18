@@ -16,12 +16,13 @@ body{
     cursor: pointer;
     box-shadow: 0 0.4rem 1.4rem 0 rgba(6, 103, 247, 0.5);
     transform: scale(1.02);
-    transform: transform 100ms;
+    transition: transform 100ms;
 
 }
 
 .choice-prefix {
     padding: 2rem 2.5rem;
+    background-color: #56a5eb;
     color: white
 }
 
@@ -43,7 +44,7 @@ body{
     justify-content: space-between;
 }
 
-#hud-prefix {
+.hud-prefix {
     text-align: center;
     font-size: 2rem;
 }
@@ -55,7 +56,7 @@ body{
 #progressBar {
     width: 20rem;
     height: 3rem;
-    border: 0.2rem solid rgb(11, 233, 36);
+    border: 0.2rem solid rgb(11, 223, 36);
     margin-top: 2rem;
     border-radius: 50px;
     overflow: hidden;
@@ -67,16 +68,16 @@ body{
     width: 0%;
 }
 
-.timer {
+/*.timer {
     width: 20rem;
     height: auto;
     margin-top: 2rem;
     margin-bottom: 2rem;
     text-align: center;
     overflow: hidden;
-}
+}*/
 
-@media screen and (max-width:760px){
+@media screen and (max-width:768px){
     .choice-container{
         min-width: 40rem;
     }
