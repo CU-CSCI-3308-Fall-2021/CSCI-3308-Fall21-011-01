@@ -11,7 +11,7 @@ require_once "config.php";
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Question 1</title>
+    <title>Home</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -111,7 +111,7 @@ require_once "config.php";
 
   <body>
     
-    <!-- navbar -->
+    <!-- NAVBAR -->
 
     <nav class="navbar navbar-expand-lg bluebg navbar-light">
 
@@ -132,7 +132,7 @@ require_once "config.php";
             <div class="collapse navbar-collapse navbar-brand brand-centered">
 
             <img class="bluebg rounded-circle"
-            src="./img/brain.png"
+            src="../resources/brain.png"
             alt="website icon"
             id="icon"
             width="150px"
@@ -157,6 +157,7 @@ require_once "config.php";
 
     </nav>
 
+    <!--- END NAVBAR -->
 
     <br /><br /><br /><br />
 
@@ -174,12 +175,8 @@ require_once "config.php";
     
     <div class="container orangebg logincontainer slightrounded">
 
-        <img class="center" src="./img/cooltext394869447794294.png" width=200px>
-
-        <div class="form-group row">
-            
-
-        </div>
+      <img class="center" src="../resources/cooltext394869447794294.png" width=200px></img>
+      <form>
         <div class="form-group row">
             <label class="col-sm-3 col-form-label" for="userName" style="font-family:verdana"
               >Username</label
@@ -192,28 +189,32 @@ require_once "config.php";
               name="usernme"
               placeholder="Username"
             />
-        </div>
+          </div>
+      </div>
+
         <div class="form-group row">
-            <label class="col-sm-3 col-form-label" for="passwordConfirm" style="font-family:verdana"
+            <label class="col-sm-3 col-form-label" for="pass" style="font-family:verdana"
               >Password</label
             >
             <div class="col-sm-6">
               <input
                 type="password"
                 class="form-control"
-                id="passwordConfirm"
-                name="passwordConfirm"
+                id="pass"
+                name="pass"
                 placeholder="Password"
               />
             </div>
         </div>
-        
+
+      </form>
+
     
     </div>
 
     
 
-    <div class="container bluebg logincontainer pt-2 slightrounded">
+    <div class="container bluebg logincontainer pt-2">
   
         <div class="row ">
             <div class="col-sm-2">
