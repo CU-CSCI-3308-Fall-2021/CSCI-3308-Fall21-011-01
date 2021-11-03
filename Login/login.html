@@ -178,14 +178,7 @@
               >Username</label
             >
             <div class="col-sm-6">
-              <input
-                type="name"
-                class="form-control"
-                name="userName"
-                id="userName"
-                placeholder="Username"
-              />
-            </div>
+              <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
         </div>
         <div class="form-group row">
             <label class="col-sm-3 col-form-label" for="passwordConfirm" style="font-family:verdana"
