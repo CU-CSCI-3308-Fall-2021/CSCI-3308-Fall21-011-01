@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS game3_lvl5 (
     choice4 BIGINT
 );
 
-/*
+
 INSERT INTO game3_lvl1()
 VALUES(1, 'If Jamie has three apples and gives two of them away, how many apples does she have?', 1, 1, 2, 3, 4),
 (2, 'If Vix has five potions and he buys three more, how many potions does he have?', 8, 7, 8, 5, 4),
@@ -93,4 +93,3 @@ INSERT INTO game3_lvl5()
 VALUES(1,'Max has twenty apples and four baskets.  If he wants to have an equal number of apples in each basket how many apples will there be in each basket?', 5, 5, 3, 6, 8),
 (2,'Davis has twenty math problems to solve, if he solves four an hour, how many hours will it take for him to solve all of the math problems?', 5, 5, 3, 6, 8),
 (3, 'If Riley’s wrestling record for the season is thirty wins and three losses, what is his win to loss ratio?', 10, 3, 10, 0.333, 0.1);
-*/
