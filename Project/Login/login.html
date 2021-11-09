@@ -55,6 +55,11 @@ require_once "config.php";
           border: 20px solid rgba(46, 109, 49, 0.3);
           border-radius: 30%;
         }
+
+        .smallpad{
+          padding-top: 0.5%;
+          padding-bottom: 0.5%;
+        }
   
         .padtop{
           padding-top: 3%
@@ -70,6 +75,10 @@ require_once "config.php";
 
         .orangebg{
           background-color: rgb(243, 186, 112)
+        }
+
+        .colorbg{
+          background-color: rgb(75, 74, 74)
         }
 
         .center {
@@ -135,7 +144,7 @@ require_once "config.php";
             src="../resources/brain.png"
             alt="website icon"
             id="icon"
-            width="150px"
+            width="120px"
             >
 
             </div>
@@ -161,19 +170,16 @@ require_once "config.php";
 
     <br /><br /><br /><br />
 
-    <div class="container">
 
-    </div>
+    <!-- <div class="container" style="width:50%">
+      <img class="center" src="../resources/funmath.png" width=50px></img>
+    </div> -->
 
-    <!--- Log In Form-->
+    <div class="container padbot"></div>
 
-    <!--
-    <div class="container orangebg logincontainer">
-        <img class="center" src="./img/cooltext394869447794294.png" width=200px>
-    </div>
-    -->
-    
-    <div class="container orangebg logincontainer slightrounded">
+    <div class="container bluebg logincontainer smallpad">
+
+    <div class="container orangebg ">
 
       <img class="center" src="../resources/cooltext394869447794294.png" width=200px></img>
       <form>
@@ -185,8 +191,8 @@ require_once "config.php";
               <input
               type="username"
               class="form-control"
-              id="Username"
-              name="usernme"
+              id="usrlogin"
+              name="usrlogin"
               placeholder="Username"
             />
           </div>
@@ -200,8 +206,8 @@ require_once "config.php";
               <input
                 type="password"
                 class="form-control"
-                id="pass"
-                name="pass"
+                id="passlogin"
+                name="passlogin"
                 placeholder="Password"
               />
             </div>
@@ -209,12 +215,10 @@ require_once "config.php";
 
       </form>
 
-    
     </div>
-
     
 
-    <div class="container bluebg logincontainer pt-2">
+    <div class="container orangebg pt-2">
   
         <div class="row ">
             <div class="col-sm-2">
@@ -225,7 +229,7 @@ require_once "config.php";
             </div>
 
             <div class="col-sm-6">
-                <a class="pt-2 text-warning"
+                <a class="pt-2"
                 href="#myModal"
                 class="btn btn-info"
                 data-toggle="modal"
@@ -233,9 +237,10 @@ require_once "config.php";
                 >Click to Sign Up</a>
             </div>    
         </div>
-        
-    
     </div>
+
+  </div>
+    
 
     <!-- Register Modal HTML -->
 
@@ -261,7 +266,9 @@ require_once "config.php";
           </div>
           <div class="modal-body">
 
-            <form action="./register.php" method="POST">
+            <!-- Register Form  -->
+
+            <form action="./register.php" class="form" method="POST">
 
             <div class="form-group" >
               <input
@@ -287,6 +294,7 @@ require_once "config.php";
                 class="form-control"
                 name="password"
                 placeholder="Password"
+                id="psw"
                 required="required"
               />
             </div>
@@ -296,23 +304,25 @@ require_once "config.php";
                 class="form-control"
                 name="confirmpassword"
                 placeholder="Confirm Password"
+                id="cpsw "
                 required="required"
               />
             </div>
             <div class="form-group">
-              <button
+              <!-- <button
                 id="my_submit_button"
                 class="btn btn-primary btn-block login-btn"
-                name="submit"
-                disabled
+                name="submitbutton"
               >
                 Sign Up
-              </button>
+              </button> -->
+              <input class="" type="submit" name="submitbutton" value="Create Account" id="submitbutton" disabled/>
             </div>
           </form>
-
-
           </div>
+
+          <!-- Password Requirement Stuff -->
+
           <div class="modal-footer">
             <div id="message" style="display: block">
               <h3>Password must contain the following:</h3>
