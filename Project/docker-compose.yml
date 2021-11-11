@@ -20,7 +20,6 @@ services:
                                                 #   in our case the file `init_data/create.sql`
     
   web:
-    web:
     image: node:12
     user: "node"                                # Use a non-root user node
     working_dir: /home/node/app                 # with home directory /home/node/app
