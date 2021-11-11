@@ -8,6 +8,8 @@
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
+const path = require("path");
+app.use(express.static(__dirname + '/Games/game_3/'));//This line is necessary for us to use relative paths and access our resources directory
 
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies\
@@ -33,6 +35,10 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 // Route to login page
 app.get('/login', (req, res) => {
     res.sendFile('/Login/login.html');
+});
+
+app.get('/game3', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
 });
 
 // Get entered user data from registry and insert into table
@@ -77,6 +83,8 @@ app.post('/Login/login', (req, res) => {
     });
 
 });
+
+app.listen(3000);
 
 // TO DO:
 
