@@ -48,7 +48,7 @@ app.post('/Login/login', (req, res) => {
     let password = req.body.password;
     let email = req.body.email
     
-    var taken = "SELECT COUNT(*) FROM user_table WHERE username='{username}'";
+    var taken = "SELECT COUNT(*) FROM user_table WHERE username='"+username+"';";
 
     // see if username is already in database
 
