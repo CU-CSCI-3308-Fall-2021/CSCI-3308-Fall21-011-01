@@ -13,11 +13,12 @@ services:
       POSTGRES_PASSWORD: pwd
       POSTGRES_DB: project_db
     expose:
-      - "3306"                                  # We need only expose port `5432` internally to node (not the host)
+      - "5432"                                  # We need only expose port `5432` internally to node (not the host)
     volumes:
       - cooldb:/var/lib/postgresql/data
       - ./init_data:/docker-entrypoint-initdb.d # Binds ./init_data to docker-entrypoint-initdb.d.
-                                                #   The postgres image will run any files in this directory on startup,
+    ports:
+      - "5432:5432"                                            #   The postgres image will run any files in this directory on startup,
                                                 #   in our case the file `init_data/create.sql`
 
     
