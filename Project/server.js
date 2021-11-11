@@ -9,7 +9,8 @@ var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
 const path = require("path");
-app.use(express.static(__dirname + '/Games/game_3/'));//This line is necessary for us to use relative paths and access our resources directory
+app.use(express.static(__dirname + '/Style'));//This line is necessary for us to use relative paths and access our resources directory
+app.use(express.static(__dirname + '/Script'));
 
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies\
@@ -39,6 +40,9 @@ app.get('/login', (req, res) => {
 
 app.get('/game3', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
+});
+app.get('/game33.html', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
 });
 
 // Get entered user data from registry and insert into table
