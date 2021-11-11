@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS user_table (
     username SERIAL PRIMARY KEY,
     pass_word VARCHAR(20) NOT NULL,
     email VARCHAR(50),
-    variable SMALLINT,
+    supervisor_variable SMALLINT,
     game1_score BIGINT,
     game1_attempts BIGINT,
     game2_score BIGINT,
