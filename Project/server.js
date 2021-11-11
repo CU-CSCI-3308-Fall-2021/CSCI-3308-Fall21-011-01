@@ -38,6 +38,10 @@ app.get('/login', (req, res) => {
     res.sendFile('/Login/login.html');
 });
 
+app.get('/game1', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_1/views/game1H.html"));
+});
+
 app.get('/game3', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
 });
