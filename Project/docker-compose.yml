@@ -12,7 +12,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pwd
-      POSTGRES_DB: football_db
+      POSTGRES_DB: project_db
     expose:
       - "3306"                                  # We need only expose port `5432` internally to node (not the host)
     volumes:
@@ -42,7 +42,7 @@ services:
   web:
     image: node:12
     user: "node"                                # Use a non-root user node
-    working_dir: /home/node/app                 # with home directory /home/node/app
+    working_dir: /home/node/app                    # with home directory /home/node/app
     # environment:
     #   - NODE_ENV=production                   # << Use this when deploying your application,
     #                                           #   currently we have it off so that changes to
