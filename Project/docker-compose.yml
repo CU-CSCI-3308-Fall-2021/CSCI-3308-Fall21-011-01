@@ -2,25 +2,44 @@
 services:
 
   db:
-    image: mysql:8.0
+
+  db:
+    
+    image: postgres
     # Environment variables to setup postgres. Note that this is not secure, and
     # in production (or your project), you should store these in a different
     # file [5] or use secrets [6]. In no case should such files be uploaded to GitHub.
     environment:
-      MYSQL_DATABASE: projectdatabase
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pwd
+      POSTGRES_DB: football_db
     expose:
-      - "3306"                                  
+      - "3306"                                  # We need only expose port `5432` internally to node (not the host)
     volumes:
-      - volumedb:/var/lib/mysql                 # Creates a docker managed volume to persist your data.
-      - ./Database:/docker-entrypoint-initdb.d  # Binds ./database to docker-entrypoint-initdb.d.
+      - volumedb:/var/lib/postgresql/data       # Creates a docker managed volume to persist your data.
+      - ./init_data:/docker-entrypoint-initdb.d # Binds ./init_data to docker-entrypoint-initdb.d.
                                                 #   The postgres image will run any files in this directory on startup,
                                                 #   in our case the file `init_data/create.sql`
+
+    
+    # image: mysql:8.0
+    # # Environment variables to setup postgres. Note that this is not secure, and
+    # # in production (or your project), you should store these in a different
+    # # file [5] or use secrets [6]. In no case should such files be uploaded to GitHub.
+    # environment:
+    #   MYSQL_DATABASE: projectdatabase
+    #   MYSQL_USER: user
+    #   MYSQL_PASSWORD: password
+    #   MYSQL_ROOT_PASSWORD: root
+    # expose:
+    #   - "3306"                                  
+    # volumes:
+    #   - volumedb:/var/lib/mysql                 # Creates a docker managed volume to persist your data.
+    #   - ./Database:/docker-entrypoint-initdb.d  # Binds ./database to docker-entrypoint-initdb.d.
+    #                                             #   The postgres image will run any files in this directory on startup,
+    #                                             #   in our case the file `init_data/create.sql`
     
   web:
-    web:
     image: node:12
     user: "node"                                # Use a non-root user node
     working_dir: /home/node/app                 # with home directory /home/node/app

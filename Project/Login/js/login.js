@@ -58,8 +58,7 @@ function openModal() {
     };
   
     
-    confirmMyInput.onkeyup = function () { 
-      // Validate password and confirmPassword
+
       if (myInput.value === confirmMyInput.value) {
         match.classList.remove("invalid");
         match.classList.add("valid");
@@ -68,16 +67,16 @@ function openModal() {
         match.classList.add("invalid");
       }
 
-      enableButton(letter, capital, number, length, match);
-    };
+      //enableButton(letter, capital, number, length);
+
   }
   
   function enableButton(letter, capital, number, length, match) {
     
     var button = document.getElementById("submitbutton");
     
-    if (letter.classList.contains("valid") == true && capital.classList.contains("valid") && number.classList.contains("valid") && length.classList.contains("valid") && match.classList.contains("valid") ) {
-      button.disabled = false;
+    if (letter.classList.contains("valid") == true && capital.classList.contains("valid") && number.classList.contains("valid") && length.classList.contains("valid")) {
+      //button.disabled = false;
       
     } 
   

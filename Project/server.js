@@ -24,7 +24,7 @@ const dbConfig = {
 
 var db = pgp(dbConfig);
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
 // Login Page:
