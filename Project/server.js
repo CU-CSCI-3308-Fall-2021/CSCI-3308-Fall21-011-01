@@ -98,6 +98,12 @@ app.get('/game33.html', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
 });
 
+// --------- Game 1: ------------
+
+app.get('/game1', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_1/game1H.html"));
+});
+
 app.listen(3000);
 
 // TO DO:
