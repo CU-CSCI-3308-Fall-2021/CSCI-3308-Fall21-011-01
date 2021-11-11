@@ -8,6 +8,7 @@
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
+
 app.use(bodyParser.json());              // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies\
 
@@ -76,3 +77,10 @@ app.post('/Login/login', (req, res) => {
     });
 
 });
+
+// TO DO:
+
+// app get for scores page
+// app post for scores
+
+// app get and post for game 1 2 3

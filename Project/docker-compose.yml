@@ -1,8 +1,7 @@
 
 services:
 
-  db:
-
+  
   db:
     
     image: postgres
@@ -16,33 +15,16 @@ services:
     expose:
       - "3306"                                  # We need only expose port `5432` internally to node (not the host)
     volumes:
-      - volumedb:/var/lib/postgresql/data       # Creates a docker managed volume to persist your data.
+      - cooldb:/postgresql/stuff         # Creates a docker managed volume to persist your data.
       - ./init_data:/docker-entrypoint-initdb.d # Binds ./init_data to docker-entrypoint-initdb.d.
                                                 #   The postgres image will run any files in this directory on startup,
                                                 #   in our case the file `init_data/create.sql`
 
     
-    # image: mysql:8.0
-    # # Environment variables to setup postgres. Note that this is not secure, and
-    # # in production (or your project), you should store these in a different
-    # # file [5] or use secrets [6]. In no case should such files be uploaded to GitHub.
-    # environment:
-    #   MYSQL_DATABASE: projectdatabase
-    #   MYSQL_USER: user
-    #   MYSQL_PASSWORD: password
-    #   MYSQL_ROOT_PASSWORD: root
-    # expose:
-    #   - "3306"                                  
-    # volumes:
-    #   - volumedb:/var/lib/mysql                 # Creates a docker managed volume to persist your data.
-    #   - ./Database:/docker-entrypoint-initdb.d  # Binds ./database to docker-entrypoint-initdb.d.
-    #                                             #   The postgres image will run any files in this directory on startup,
-    #                                             #   in our case the file `init_data/create.sql`
-    
   web:
     image: node:12
     user: "node"                                # Use a non-root user node
-    working_dir: /home/node/app                    # with home directory /home/node/app
+    working_dir: /                             # with home directory /home/node/app
     # environment:
     #   - NODE_ENV=production                   # << Use this when deploying your application,
     #                                           #   currently we have it off so that changes to
@@ -65,4 +47,4 @@ services:
 # run `docker-compose rm -v`. Note that this will remove ALL of your data, so
 # be extra sure you've made a stable backup somewhere.
 volumes:
-  volumedb: {}
+  cooldb: {}
