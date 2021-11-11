@@ -29,20 +29,15 @@ const dbConfig = {
 var db = pgp(dbConfig);
 
 app.set('view engine', 'html');
-app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
+//app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
-// Login Page:
+
+
+// -------- Login Page: --------------
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.sendFile('/Login/login.html');
-});
-
-app.get('/game3', (req, res) => {
-    res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
-});
-app.get('/game33.html', (req, res) => {
-    res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
+    res.sendFile(__dirname + '/Login/login.html');
 });
 
 // Get entered user data from registry and insert into table
@@ -56,23 +51,28 @@ app.post('/Login/login', (req, res) => {
     var taken = "SELECT COUNT(*) FROM user_table WHERE username='{username}'";
 
     // see if username is already in database
+
     if(taken == 0){
         var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
     }else{
+        console.log('taken username');
         // give error message saying username is taken
     }
 
     // insert into database
+    
     db.task('get-everything', task =>{
         return task.batch([
             task.any(insert)
         ]);
     })
+
     .then(info => {
         
         console.log('success register');
 
-        res.render('Home/home',{
+        res.render('Login/login.html',{
+
             // render home page after they registered
 
            
@@ -86,6 +86,16 @@ app.post('/Login/login', (req, res) => {
 
     });
 
+});
+
+
+// --------- Game 3: ------------
+
+app.get('/game3', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
+});
+app.get('/game33.html', (req, res) => {
+    res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
 });
 
 app.listen(3000);
