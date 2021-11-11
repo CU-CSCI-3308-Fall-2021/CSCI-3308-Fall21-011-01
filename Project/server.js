@@ -20,8 +20,8 @@ var pgp = require('pg-promise')();
 
 const dbConfig = {
 	host: 'db',
-	port: 3306,
-	database: 'tables',
+	port: 5432,
+	database: 'project_db',
 	user: 'postgres',
 	password: 'pwd'
 };
@@ -51,13 +51,13 @@ app.post('/Login/login', (req, res) => {
     var taken = "SELECT COUNT(*) FROM user_table WHERE username='"+username+"';";
 
     // see if username is already in database
-
-    if(taken == 0){
-        var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-    }else{
-        console.log('taken username');
-        // give error message saying username is taken
-    }
+    var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    // if(taken == 0){
+    //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    // }else{
+    //     console.log('taken username');
+    //     // give error message saying username is taken
+    // }
 
     // insert into database
     
@@ -82,6 +82,7 @@ app.post('/Login/login', (req, res) => {
     .catch(err =>{
 
         // display error message on screen
+        console.log(err);
         console.log('error happened');
 
     });
