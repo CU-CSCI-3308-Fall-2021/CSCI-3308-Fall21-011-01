@@ -5,6 +5,8 @@
   Body-Parser  - A tool to help use parse the data in a post request
   Pg-Promise   - A database tool to help use connect to our PostgreSQL database
 ***********************/
+//
+
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
 var bodyParser = require('body-parser'); //Ensure our body-parser tool has been added
@@ -42,7 +44,7 @@ app.get('/login', (req, res) => {
 
 // Get entered user data from registry and insert into table
 
-app.post('/Login/login', (req, res) => {
+app.post('/Login/login', (req, res) => { 
     
     let username = req.body.username;
     let password = req.body.password;
