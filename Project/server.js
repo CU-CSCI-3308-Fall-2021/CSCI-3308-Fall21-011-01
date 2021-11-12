@@ -51,9 +51,20 @@ app.post('/Login/login', (req, res) => {
     let email = req.body.email
     
     var taken = "SELECT COUNT(*) FROM user_table WHERE username='"+username+"';";
+    var result = 0;
+
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(taken)
+        ]);
+    })
+    .then(data => {
+        result = data[0][0].count,
+        console.log(result)
+    })
 
     // see if username is already in database
-    var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
     // if(taken == 0){
     //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
     // }else{
@@ -61,7 +72,7 @@ app.post('/Login/login', (req, res) => {
     //     // give error message saying username is taken
     // }
 
-    // insert into database
+    //insert into database
     
     db.task('get-everything', task =>{
         return task.batch([
