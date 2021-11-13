@@ -38,62 +38,63 @@
 
   <body>
     
-    <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-    <nav class="navbar navbar-expand-lg bluebg navbar-light">
+<nav class="navbar navbar-expand-lg bluebg navbar-light">
 
-      <div class="collapse navbar-collapse" id="navbarText">
+  <div class="collapse navbar-collapse" id="navbarText">
 
-       
-              <img class="bluebg rounded-circle"
-              src="../resources/brain.png"
-              alt="website icon"
-              id="icon"
-              width="90px"
-              >
+   
+          <img class="bluebg rounded-circle"
+          src="../resources/brain.png"
+          alt="website icon"
+          id="icon"
+          width="90px"
+          >
 
 
-          <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto">
 
-          <li class="nav-item active">
-            <a class="nav-link" href="../Views/home.html">Home <span class="sr-only">(current)</span></a>
-          </li>
+      <li class="nav-item active">
+        <a class="btn btn-default" type="button" onclick="redir('/home')">   Home   <span class="sr-only">(current)</span></a>
+      </li>
 
-          <li class = "nav-item">
-              <a class="nav-link" href="../Views/login.ejs">Login</a>
-          </li>
+      <li class = "nav-item">
+          <a class="btn btn-default" type="button" onclick="redir('/login')">   logout  <span class="sr-only">(current)</span></a>
+      </li>
 
-          </ul>
+    </ul>
 
-         
+     
 
-      </div>
+  </div>
 
+  
+  
+  
+  <div class="form-inline my-2 my-lg-0">
       
-      <div class="form-inline my-2 my-lg-0">
+      <div class="dropdown">
           
-          <div class="dropdown">
-              
-              <button onclick="dropdownfunc()" class="btn btn-default">
-                  <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
-              </button>
-              
-                  <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
-                  <a href="#" id="usernamedropdown">Username</a>
-                  <a href="#">Settings</a>
-                  </div>
-
-          </div>
+          <button onclick="dropdownfunc()" class="btn btn-default">
+              <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+          </button>
+          
+              <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+              <a href="#" id="usernamedropdown">no user</a>
+              <a href="#">Settings</a>
+              </div>
 
       </div>
 
-    </div>
+  </div>
+
+</div>
 
 
-  </nav>
+</nav>
 
-
-    <!--- END NAVBAR -->
+<!--- END NAVBAR -->
 
     <br /><br /><br /><br />
 
@@ -109,7 +110,7 @@
     <div class="container orangebg ">
 
       <img class="center" src="../resources/cooltext394869447794294.png" width=200px></img>
-      <form>
+      <form  autocomplete="off" action="/Login/login" class="form" method="POST">
         <div class="form-group row">
             <label class="col-sm-3 col-form-label" for="userName" style="font-family:verdana" id="username"
               >Username</label
@@ -124,22 +125,23 @@
             />
           </div>
       </div>
-
-        <div class="form-group row">
-            <label class="col-sm-3 col-form-label" for="pass" style="font-family:verdana" id="password"
-              >Password</label
-            >
-            <div class="col-sm-6">
-              <input
-                type="password"
-                class="form-control"
-                id="passlogin"
-                name="passlogin"
-                placeholder="Password"
-              />
-            </div>
-        </div>
-
+      
+          <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="pass" style="font-family:verdana" id="password"
+                >Password</label
+              >
+              <div class="col-sm-6">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passlogin"
+                  name="passlogin"
+                  placeholder="Password"
+                />
+              </div>
+              
+          </div>
+          <input class="" type="submit" name="submitbutton" value="Login" id="submitbutton"/>
       </form>
 
     </div>

@@ -35,25 +35,22 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
 // --- HOME PAGHR -----
 
-app.get('/home', (req, res) => {
-    res.render(__dirname + '/Views/home.ejs');
-});
 
 
 // -------- Login Page: --------------
 
 // Route to login page
-app.get('/login', (req, res) => {
+app.get('/login', (req, res) => { //go to login page
     res.render(__dirname + '/Views/login');
 });
 
 // Get entered user data from registry and insert into table
-app.post('/game1', (req, res) => {
+
+
+app.post('/game1', (req, res) => { //input score, half implemented
     let score = req.body.value;
     let username=req.body.username;
-    console.log(username);
     var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
-    console.log(update);
     db.task('update', task =>{
         return task.batch([
             task.any(update),
@@ -61,14 +58,26 @@ app.post('/game1', (req, res) => {
     })
 });
 
-app.post('/boatGame', (req, res) => {
+app.post('/home', (req, res) => { //input score, half implemented
+    let username=req.body.username;
+    res.render(__dirname + '/Views/home.ejs',{
+        user: username
+    });
+});
+
+app.post('/login', (req, res) => { //input score, half implemented
+    res.render(__dirname + '/Views/login.ejs',{
+    });
+});
+
+app.post('/boatGame', (req, res) => {  //to boat game
     let username=req.body.username;
     res.render(__dirname + '/Views/game1H.ejs',{
         user: username
     });
 });
 
-app.post('/Login/check', (req, res) => { 
+app.post('/Login/check', (req, res) => {  //add user and redirect to home
 
     let username = req.body.username;
     let password = req.body.password;
@@ -102,51 +111,34 @@ app.post('/Login/check', (req, res) => {
     
 });
 
-app.post('/Login/login', (req, res) => { 
+app.post('/Login/login', (req, res) => { //currently disabled
     
-    let username = req.body.username;
-    let password = req.body.password;
-    let email = req.body.email
-
-    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-
-
-    // see if username is already in database
-    //console.log(insert);
-    // if(taken == 0){
-    //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-    // }else{
-    //     console.log('taken username');
-    //     // give error message saying username is taken
-    // }
-
-    //insert into database
-    
-//     db.task('get-everything', task =>{
-//         return task.batch([
-//             task.any(insert)
-//         ]);
-//     })
-
-//     .then(info => {
-        
-//         console.log('success register');
-
-//         res.render('Login/login.html',{
-
-//             // render home page after they registered
-
-           
-//         })  
-
-//     })
-//     .catch(err =>{
-
-//         // display error message on screen
-//         console.log(err);
-//         console.log('error happened');
-
-//     });
+    let username = req.body.usrlogin;
+    let password = req.body.passlogin;
+    console.log("user: "+String(username)+" is trying to login with pass: "+ String(password)+" \n \n");
+    var queery = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' and pass_word = '"+password+"';";
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(queery),
+        ]);
+    })
+    .then(data => {
+        result = data[0][0].count,
+        console.log(result)
+        console.log("printed in .then");
+        if(result==0)
+        {
+            //failed, redirect to the login page and complain about not being in the database with that combo
+            res.render(__dirname + '/Views/login.ejs');
+        }
+        else
+        {
+            //worked send to home
+            res.render(__dirname + '/Views/home.ejs',{
+				user: username
+			})
+        }
+    })
 
 });
 
@@ -160,11 +152,6 @@ app.get('/game33.html', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
 });
 
-// --------- Game 1: ------------
-
-app.get('/game1', (req, res) => {
-    res.sendFile(path.join(__dirname, "Games/game_1/game1H.html"));
-});
 
 app.listen(3000);
 

@@ -72,7 +72,15 @@ function openModal() {
   // dropdown btn
   function dropdownfunc() {
     console.log("did it");
-    document.getElementById("myDropdown").style.visibility = "visible";
+    var but = document.getElementById("myDropdown")
+    if(but.style.visibility=="visible")
+    {
+      but.style.visibility = "hidden";
+    }
+    else
+    {
+      but.style.visibility = "visible";
+    }
   }
   
  
