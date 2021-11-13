@@ -86,3 +86,10 @@ function openModal() {
     alert("Hey! I'm all green! Well done.");
   }
   
+  // dropdown btn
+  function dropdownfunc() {
+    console.log("did it");
+    document.getElementById("myDropdown").style.visibility = "visible";
+  }
+  
+ 

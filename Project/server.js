@@ -63,16 +63,6 @@ app.post('/Login/login', (req, res) => {
         console.log(result)
     })
 
-    // see if username is already in database
-    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-    // if(taken == 0){
-    //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-    // }else{
-    //     console.log('taken username');
-    //     // give error message saying username is taken
-    // }
-
-    //insert into database
     
     db.task('get-everything', task =>{
         return task.batch([
