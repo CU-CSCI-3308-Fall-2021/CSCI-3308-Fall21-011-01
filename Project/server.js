@@ -44,7 +44,7 @@ app.get('/home', (req, res) => {
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.render(__dirname + '/Views/login.ejs');
+    res.render(__dirname + '/Views/login');
 });
 
 
@@ -77,7 +77,6 @@ app.post('/login/register', (req, res) => {
             res.render(__dirname + '/Views/home',{
 				user: username
 			})
-            console.log(username);
         }
         else
         {   

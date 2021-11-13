@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="../Script/login.js"></script>
+      <script src="../Script/homesripts.js"></script>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Home</title>
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+      />
+      <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"
+      ></script>
+      <link rel="stylesheet" type="text/css" href="../Style/login.css" />
+      <link rel="stylesheet" type="text/css" href="../Style/styles.css" />
+  </head>
+  <body class="nicebg" onload="drawcanvas()">
+      <!-- NAVBAR -->
+
+      <nav class="navbar navbar-expand-lg bluebg navbar-light">
+
+        <div class="collapse navbar-collapse" id="navbarText">
+
+         
+                <img class="bluebg rounded-circle"
+                src="../resources/brain.png"
+                alt="website icon"
+                id="icon"
+                width="90px"
+                >
+
+  
+            <ul class="navbar-nav mr-auto">
+  
+            <li class="nav-item active">
+              <a class="nav-link" href="../Views/home.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+  
+            <li class = "nav-item">
+                <a class="nav-link" href="../Views/login.html">Login</a>
+            </li>
+
+          </ul>
+
+           
+
+        </div>
+
+        
+        
+        
+        <div class="form-inline my-2 my-lg-0">
+            
+            <div class="dropdown">
+                
+                <button onclick="dropdownfunc()" class="btn btn-default">
+                    <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+                </button>
+                
+                    <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+                    <a href="#" id="usernamedropdown"><%-user%></a>
+                    <a href="#">Settings</a>
+                    </div>
+
+            </div>
+
+        </div>
+
+      </div>
+ 
+
+    </nav>
+
+    <!--- END NAVBAR -->
+      <img src="../../resources/BESTBOATEVER.png" alt="ree", id='playerimage'  style="display: none;">
+      <img src="../../resources/redbonx.png" alt="ree", id='rockimage' style="display: none;">
+      <img src="../../resources/ice.png" alt="ree", id='iceimage' style="display: none;">
+    <div class="container">
+      <form action="home.html">
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <input
+              type="search"
+              class="form-control"
+              name="input"
+              id="input"
+              autofocus="true"
+              placeholder=""
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <script src="../../Script/game1J.js"></script>
+        <canvas id="myCanvas" width="1000" height="750"style="border:1px solid #000000; background-image: url('../../resources/watergif3.gif')"></canvas>
+    </body>
+</html>

@@ -196,10 +196,15 @@ function removerock(id)
   }
 }
 function keyDownHandler(event) {
+  if(event.keyCode == 13) { //enter blocking
+    event.preventDefault();
+}
   if(event.keyCode == 39) {
       rightPressed = true;
+      event.preventDefault();
   }
   if(event.keyCode == 37) {
+    event.preventDefault();
       leftPressed = true;
   }
   if(event.keyCode == 40) {
@@ -211,9 +216,11 @@ function keyDownHandler(event) {
 }
 function keyUpHandler(event) {
   if(event.keyCode == 39) {
+    event.preventDefault();
       rightPressed = false;
   }
   if(event.keyCode == 37) {
+    event.preventDefault();
       leftPressed = false;
   }
   if(event.keyCode == 40) {
@@ -329,7 +336,7 @@ function draw() {
 
 function drawcanvas()
 {
-  user=document.getElementById("username").innerHTML;
+  user=document.getElementById("usernamedropdown").innerHTML
   console.log(user)
   console.log("\n was user \n");
   c = document.getElementById("myCanvas");
