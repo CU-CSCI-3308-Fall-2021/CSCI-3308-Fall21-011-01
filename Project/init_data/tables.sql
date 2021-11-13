@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS user_table CASCADE;
-CREATE TABLE IF NOT EXISTS user_table (
+DROP TABLE IF EXISTS user_table_better CASCADE;
+CREATE TABLE IF NOT EXISTS user_table_better (
     username VARCHAR(500) NOT NULL PRIMARY KEY,
     pass_word VARCHAR(20) NOT NULL,
     email VARCHAR(50),
