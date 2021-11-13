@@ -18,7 +18,8 @@ services:
       - cooldb:/var/lib/postgresql/data
       - ./init_data:/docker-entrypoint-initdb.d # Binds ./init_data to docker-entrypoint-initdb.d.
     ports:
-      - "5432:5432"                                            #   The postgres image will run any files in this directory on startup,
+      - "5432:5432"  
+                                        #   The postgres image will run any files in this directory on startup,
                                                 #   in our case the file `init_data/create.sql`
 
     

@@ -5,7 +5,7 @@
   Body-Parser  - A tool to help use parse the data in a post request
   Pg-Promise   - A database tool to help use connect to our PostgreSQL database
 ***********************/
-//
+// docker-compose exec db psql -U postgres
 
 var express = require('express'); //Ensure our express framework has been added
 var app = express();
@@ -47,21 +47,8 @@ app.get('/login', (req, res) => {
     res.render(__dirname + '/Views/login.ejs');
 });
 
-// Get entered user data from registry and insert into table
-app.post('/game1', (req, res) => {
-    let score = req.body.value;
-    let username=req.body.username;
-    console.log(username);
-    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
-    console.log(update);
-    db.task('update', task =>{
-        return task.batch([
-            task.any(update),
-        ]);
-    })
-});
 
-app.post('/Login/check', (req, res) => { 
+app.post('/login/register', (req, res) => { 
 
     let username = req.body.username;
     let password = req.body.password;
@@ -69,80 +56,46 @@ app.post('/Login/check', (req, res) => {
     var taken = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"';";
     var insert = "INSERT INTO user_table_better(username, pass_word, email, supervisor_variable, game1_score, game1_attempts,game2_score, game2_attempts,game3_score, game3_attempts,reported_variable ) VALUES ('"+username+"','"+password+"','"+email+"',0,0,0,0,0,0,0,0) ON CONFLICT DO NOTHING";
    
+    console.log("test");
+
     db.task('get-everything', task =>{
+        console.log("done this shit");
         return task.batch([
             task.any(taken),
             task.any(insert)
         ]);
     })
     .then(data => {
+
         result = data[0][0].count,
         console.log(result)
         console.log("printed in .then");
+
         if(result==0)
         {
             //worked, user is in the database, direct to the home page
-            res.render(__dirname + '/Views/home.ejs',{
+            res.render(__dirname + '/Views/home',{
 				user: username
 			})
             console.log(username);
         }
         else
-        {
+        {   
+            console.log("failed");
             //failed, redirect to the login page and complain about the username being taken
-            res.render(__dirname + '/Views/login.ejs');
+            res.render(__dirname + '/Views/login');
         }
     })
+    .catch(err => {
+        console.log('error', err);
+        res.render(__dirname + '/Views/home', {
+         
+    })
+});
     
 });
 
-app.post('/Login/login', (req, res) => { 
-    
-    let username = req.body.username;
-    let password = req.body.password;
-    let email = req.body.email
 
-    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-
-
-    // see if username is already in database
-    //console.log(insert);
-    // if(taken == 0){
-    //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
-    // }else{
-    //     console.log('taken username');
-    //     // give error message saying username is taken
-    // }
-
-    //insert into database
-    
-//     db.task('get-everything', task =>{
-//         return task.batch([
-//             task.any(insert)
-//         ]);
-//     })
-
-//     .then(info => {
-        
-//         console.log('success register');
-
-//         res.render('Login/login.html',{
-
-//             // render home page after they registered
-
-           
-//         })  
-
-//     })
-//     .catch(err =>{
-
-//         // display error message on screen
-//         console.log(err);
-//         console.log('error happened');
-
-//     });
-
-});
 
 
 // --------- Game 3: ------------
@@ -158,6 +111,20 @@ app.get('/game33.html', (req, res) => {
 
 app.get('/game1', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_1/game1H.html"));
+});
+
+// Get entered user data from registry and insert into table
+app.post('/game1', (req, res) => {
+    let score = req.body.value;
+    let username=req.body.username;
+    console.log(username);
+    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    console.log(update);
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+        ]);
+    })
 });
 
 app.listen(3000);
