@@ -30,7 +30,7 @@ const dbConfig = {
 
 var db = pgp(dbConfig);
 
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
 
@@ -39,56 +39,101 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/Login/login.html');
+    res.render(__dirname + '/Login/login.ejs');
 });
 
 // Get entered user data from registry and insert into table
+app.post('/game1', (req, res) => {
+    let score = req.body.value;
+    let username=req.body.username;
+    console.log(username);
+    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    console.log(update);
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+        ]);
+    })
+});
+
+app.post('/Login/check', (req, res) => { 
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+    var taken = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"';";
+    var insert = "INSERT INTO user_table_better(username, pass_word, email, supervisor_variable, game1_score, game1_attempts,game2_score, game2_attempts,game3_score, game3_attempts,reported_variable ) VALUES ('"+username+"','"+password+"','"+email+"',0,0,0,0,0,0,0,0) ON CONFLICT DO NOTHING";
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(taken),
+            task.any(insert)
+        ]);
+    })
+    .then(data => {
+        result = data[0][0].count,
+        console.log(result)
+        console.log("printed in .then");
+        if(result==0)
+        {
+            //worked, user is in the database, direct to the home page
+            res.render(__dirname + '/Games/game_1/game1H.ejs',{
+				user: username
+			})
+            console.log(username);
+        }
+        else
+        {
+            //failed, redirect to the login page and complain about the username being taken
+            res.render(__dirname + '/Login/login.ejs');
+        }
+    })
+    
+});
 
 app.post('/Login/login', (req, res) => { 
     
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email
+
+    var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+
+
+    // see if username is already in database
+    //console.log(insert);
+    // if(taken == 0){
+    //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    // }else{
+    //     console.log('taken username');
+    //     // give error message saying username is taken
+    // }
+
+    //insert into database
     
-    var taken = "SELECT COUNT(*) FROM user_table WHERE username='"+username+"';";
-    var result = 0;
+//     db.task('get-everything', task =>{
+//         return task.batch([
+//             task.any(insert)
+//         ]);
+//     })
 
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(taken)
-        ]);
-    })
-    .then(data => {
-        result = data[0][0].count,
-        console.log(result)
-    })
-
-    
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(insert)
-        ]);
-    })
-
-    .then(info => {
+//     .then(info => {
         
-        console.log('success register');
+//         console.log('success register');
 
-        res.render('Login/login.html',{
+//         res.render('Login/login.html',{
 
-            // render home page after they registered
+//             // render home page after they registered
 
            
-        })  
+//         })  
 
-    })
-    .catch(err =>{
+//     })
+//     .catch(err =>{
 
-        // display error message on screen
-        console.log(err);
-        console.log('error happened');
+//         // display error message on screen
+//         console.log(err);
+//         console.log('error happened');
 
-    });
+//     });
 
 });
 
