@@ -108,47 +108,57 @@
 
     <nav class="navbar navbar-expand-lg bluebg navbar-light">
 
-        <div class="collapse navbar-collapse" id="navbarText">
-  
-            <ul class="navbar-nav mr-auto">
-  
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-  
-            <li class = "nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
+      <div class="collapse navbar-collapse" id="navbarText">
 
-            </ul>
+       
+              <img class="bluebg rounded-circle"
+              src="../resources/brain.png"
+              alt="website icon"
+              id="icon"
+              width="90px"
+              >
 
-            <div class="collapse navbar-collapse navbar-brand brand-centered">
 
-            <img class="bluebg rounded-circle"
-            src="../resources/brain.png"
-            alt="website icon"
-            id="icon"
-            width="120px"
-            >
+          <ul class="navbar-nav mr-auto">
 
-            </div>
-          
+          <li class="nav-item active">
+            <a class="nav-link" href="../Views/home.html">Home <span class="sr-only">(current)</span></a>
+          </li>
 
-        </div>
+          <li class = "nav-item">
+              <a class="nav-link" href="../Views/login.ejs">Login</a>
+          </li>
 
-        
-        
-        <!-- Right button on NavBar: purpose to be implented
-        <div class="form-inline my-2 my-lg-0">
-            <a href="#" class="btn">
-          <button class="btn btn-default">
-              <img class="rounded-circle" src="" alt="" width="30" height="30">
-          </button>
-          </a>
+          </ul>
+
+         
+
       </div>
-      -->
 
-    </nav>
+      
+      <div class="form-inline my-2 my-lg-0">
+          
+          <div class="dropdown">
+              
+              <button onclick="dropdownfunc()" class="btn btn-default">
+                  <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+              </button>
+              
+                  <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+                  <a href="#" id="usernamedropdown">Username</a>
+                  <a href="#">Settings</a>
+                  </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+
+  </nav>
+
+
 
     <br /><br /><br /><br />
 
