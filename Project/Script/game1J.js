@@ -285,12 +285,24 @@ function draw() {
               {
                 console.log("nice throw loser, correct answer was " + eqlist[rocklist[i].eqpointer].answer + ", you answered: " + inpt.value);
                 ded=true;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/game1", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    value: player.y
+                }));
               }
             }
             else
             {
               console.log("nice throw loser");
               ded=true;
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", "/game1", true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(JSON.stringify({
+                  value: player.y
+              }));
             }
           }
         }
@@ -310,6 +322,7 @@ function draw() {
     ctx.strokeText(Math.round(Math.abs(player.y)),10,20)
     window.requestAnimationFrame(draw);
   }
+
 }
 
 function drawcanvas()

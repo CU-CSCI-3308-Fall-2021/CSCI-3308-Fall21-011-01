@@ -43,28 +43,47 @@ app.get('/login', (req, res) => {
 });
 
 // Get entered user data from registry and insert into table
+app.post('/Login/check', (req, res) => { 
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+    var taken = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"';";
+    var insert = "INSERT INTO user_table_better(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(taken),
+            task.any(insert)
+        ]);
+    })
+    .then(data => {
+        result = data[0][0].count,
+        console.log(result)
+        console.log("printed in .then");
+        if(result==0)
+        {
+            //worked, user is in the database, direct to the home page
+            res.sendFile(__dirname + '/Games/game_1/game1H.html');
+        }
+        else
+        {
+            //failed, redirect to the login page and complain about the username being taken
+            res.sendFile(__dirname + '/Login/login.html');
+        }
+    })
+    
+});
 
 app.post('/Login/login', (req, res) => { 
     
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email
-    
-    var taken = "SELECT COUNT(*) FROM user_table WHERE username='"+username+"';";
-    var result = 0;
 
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(taken)
-        ]);
-    })
-    .then(data => {
-        result = data[0][0].count,
-        console.log(result)
-    })
+    var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+
 
     // see if username is already in database
-    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    //console.log(insert);
     // if(taken == 0){
     //     var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
     // }else{
@@ -74,31 +93,31 @@ app.post('/Login/login', (req, res) => {
 
     //insert into database
     
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(insert)
-        ]);
-    })
+//     db.task('get-everything', task =>{
+//         return task.batch([
+//             task.any(insert)
+//         ]);
+//     })
 
-    .then(info => {
+//     .then(info => {
         
-        console.log('success register');
+//         console.log('success register');
 
-        res.render('Login/login.html',{
+//         res.render('Login/login.html',{
 
-            // render home page after they registered
+//             // render home page after they registered
 
            
-        })  
+//         })  
 
-    })
-    .catch(err =>{
+//     })
+//     .catch(err =>{
 
-        // display error message on screen
-        console.log(err);
-        console.log('error happened');
+//         // display error message on screen
+//         console.log(err);
+//         console.log('error happened');
 
-    });
+//     });
 
 });
 
