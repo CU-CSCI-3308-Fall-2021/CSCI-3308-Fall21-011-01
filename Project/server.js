@@ -44,7 +44,7 @@ app.get('/home', (req, res) => {
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.render(__dirname + '/Views/login.ejs');
+    res.render(__dirname + '/Views/login');
 });
 
 // Get entered user data from registry and insert into table
@@ -59,6 +59,13 @@ app.post('/game1', (req, res) => {
             task.any(update),
         ]);
     })
+});
+
+app.post('/boatGame', (req, res) => {
+    let username=req.body.username;
+    res.render(__dirname + '/Views/game1H.ejs',{
+        user: username
+    });
 });
 
 app.post('/Login/check', (req, res) => { 
@@ -85,7 +92,6 @@ app.post('/Login/check', (req, res) => {
             res.render(__dirname + '/Views/home.ejs',{
 				user: username
 			})
-            console.log(username);
         }
         else
         {
