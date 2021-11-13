@@ -33,13 +33,18 @@ var db = pgp(dbConfig);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
+// --- HOME PAGHR -----
+
+app.get('/home', (req, res) => {
+    res.render(__dirname + '/Views/home.ejs');
+});
 
 
 // -------- Login Page: --------------
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.render(__dirname + '/Login/login.ejs');
+    res.render(__dirname + '/Views/login.ejs');
 });
 
 // Get entered user data from registry and insert into table
@@ -77,7 +82,7 @@ app.post('/Login/check', (req, res) => {
         if(result==0)
         {
             //worked, user is in the database, direct to the home page
-            res.render(__dirname + '/Home/home.ejs',{
+            res.render(__dirname + '/Views/home.ejs',{
 				user: username
 			})
             console.log(username);
@@ -85,7 +90,7 @@ app.post('/Login/check', (req, res) => {
         else
         {
             //failed, redirect to the login page and complain about the username being taken
-            res.render(__dirname + '/Login/login.ejs');
+            res.render(__dirname + '/Views/login.ejs');
         }
     })
     
