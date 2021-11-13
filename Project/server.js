@@ -57,11 +57,13 @@ app.post('/game1', (req, res) => {
 });
 
 app.post('/Login/check', (req, res) => { 
+
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
     var taken = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"';";
     var insert = "INSERT INTO user_table_better(username, pass_word, email, supervisor_variable, game1_score, game1_attempts,game2_score, game2_attempts,game3_score, game3_attempts,reported_variable ) VALUES ('"+username+"','"+password+"','"+email+"',0,0,0,0,0,0,0,0) ON CONFLICT DO NOTHING";
+   
     db.task('get-everything', task =>{
         return task.batch([
             task.any(taken),
@@ -75,7 +77,7 @@ app.post('/Login/check', (req, res) => {
         if(result==0)
         {
             //worked, user is in the database, direct to the home page
-            res.render(__dirname + '/Games/game_1/game1H.ejs',{
+            res.render(__dirname + '/Home/home.ejs',{
 				user: username
 			})
             console.log(username);
@@ -95,7 +97,7 @@ app.post('/Login/login', (req, res) => {
     let password = req.body.password;
     let email = req.body.email
 
-    var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    //var insert = "INSERT INTO user_table(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
 
 
     // see if username is already in database

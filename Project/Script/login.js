@@ -11,13 +11,11 @@ function openModal() {
   
     // When the user starts to type something inside the password field
     myInput.onkeyup = function () {
-      console.log(letter.classList);
+     // console.log(letter.classList);
   
   
       var lowerCaseLetters = /[a-z]/g; 
-      var upperCaseLetters = /[A-Z]/g; 
       var numbers = /[0-9]/g; 
-      var minLength = 8; 
  
   
       // Validate lowercase letters
@@ -29,15 +27,6 @@ function openModal() {
         letter.classList.add("invalid");
       }
   
-      // Validate capital letters
-      if (myInput.value.match(upperCaseLetters)) {
-        capital.classList.remove("invalid");
-        capital.classList.add("valid");
-      } else {
-        capital.classList.remove("valid");
-        capital.classList.add("invalid");
-      }
-  
       // Validate numbers
       if (myInput.value.match(numbers)) {
         number.classList.remove("invalid");
@@ -46,20 +35,13 @@ function openModal() {
         number.classList.remove("valid");
         number.classList.add("invalid");
       }
-  
-      // Validate length
-      if (myInput.value.length >= minLength) {
-        length.classList.remove("invalid");
-        length.classList.add("valid");
-      } else {
-        length.classList.remove("valid");
-        length.classList.add("invalid");
-      }
+     
     };
-  
-    
 
-      if (myInput.value === confirmMyInput.value) {
+    confirmMyInput.onkeyup = function () {
+  
+
+      if (myInput.value == confirmMyInput.value) {
         match.classList.remove("invalid");
         match.classList.add("valid");
       } else {
@@ -68,6 +50,7 @@ function openModal() {
       }
 
       //enableButton(letter, capital, number, length);
+    };
 
   }
   
@@ -75,7 +58,7 @@ function openModal() {
     
     var button = document.getElementById("submitbutton");
     
-    if (letter.classList.contains("valid") == true && capital.classList.contains("valid") && number.classList.contains("valid") && length.classList.contains("valid")) {
+    if (letter.classList.contains("valid") == true &&  number.classList.contains("valid") ) {
       //button.disabled = false;
       
     } 

@@ -42,47 +42,56 @@
 
     <nav class="navbar navbar-expand-lg bluebg navbar-light">
 
-        <div class="collapse navbar-collapse" id="navbarText">
-  
-            <ul class="navbar-nav mr-auto">
-  
-            <li class="nav-item active">
-              <a class="nav-link" href="../Home/home.html">Home</a>
-            </li>
-  
-            <li class = "nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
+      <div class="collapse navbar-collapse" id="navbarText">
 
-            </ul>
+       
+              <img class="bluebg rounded-circle"
+              src="../resources/brain.png"
+              alt="website icon"
+              id="icon"
+              width="90px"
+              >
 
-            <div class="collapse navbar-collapse navbar-brand brand-centered">
 
-            <img class="bluebg rounded-circle"
-            src="../resources/brain.png"
-            alt="website icon"
-            id="icon"
-            width="120px"
-            >
+          <ul class="navbar-nav mr-auto">
 
-            </div>
-          
+          <li class="nav-item active">
+            <a class="nav-link" href="../Home/home.html">Home <span class="sr-only">(current)</span></a>
+          </li>
 
-        </div>
+          <li class = "nav-item">
+              <a class="nav-link" href="../Login/login.ejs">Login</a>
+          </li>
 
-        
-        
-        <!-- Right button on NavBar: purpose to be implented
-        <div class="form-inline my-2 my-lg-0">
-            <a href="#" class="btn">
-          <button class="btn btn-default">
-              <img class="rounded-circle" src="" alt="" width="30" height="30">
-          </button>
-          </a>
+          </ul>
+
+         
+
       </div>
-      -->
 
-    </nav>
+      
+      <div class="form-inline my-2 my-lg-0">
+          
+          <div class="dropdown">
+              
+              <button onclick="dropdownfunc()" class="btn btn-default">
+                  <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+              </button>
+              
+                  <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+                  <a href="#" id="usernamedropdown">Username</a>
+                  <a href="#">Settings</a>
+                  </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+
+  </nav>
+
 
     <!--- END NAVBAR -->
 
@@ -186,10 +195,10 @@
 
             <!-- Register Form  -->
 
-            <form action="/Login/check" class="form" method="POST">
+            <form autocomplete="off" action="/Login/check" class="form" method="POST">
 
             <div class="form-group" >
-              <input
+              <input autocomplete="false"
                 type="text"
                 class="form-control"
                 name="username"
@@ -198,7 +207,7 @@
               />
             </div>
             <div class="form-group" >
-              <input
+              <input autocomplete="false"
                 type="text"
                 class="form-control"
                 name="email"
@@ -207,7 +216,7 @@
               />
             </div>
             <div class="form-group">
-              <input
+              <input autocomplete="false"
                 type="text"
                 class="form-control"
                 name="password"
@@ -217,7 +226,7 @@
               />
             </div>
             <div class="form-group">
-              <input
+              <input autocomplete="false"
                 type="text"
                 class="form-control"
                 name="confirmpassword"
@@ -245,11 +254,7 @@
             <div id="message" style="display: block">
               <h3>Password must contain the following:</h3>
               <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-              <p id="capital" class="invalid">
-                A <b>capital (uppercase)</b> letter
-              </p>
               <p id="number" class="invalid">A <b>number</b></p>
-              <p id="length" class="invalid">Minimum <b>8 characters</b></p>
               <p id="match" class="invalid">
                 Password and Confirm Password Match
               </p>
@@ -263,5 +268,5 @@
   </body>
 </html>
 
-<script src="./js/login.js"></script>
+<script src="../script/login.js"></script>
 
