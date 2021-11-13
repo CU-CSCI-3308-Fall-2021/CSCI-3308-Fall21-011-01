@@ -22,6 +22,7 @@ var eqlen=0
 
 var c;
 var ctx;
+var first=true;
 const eqfont='40px sans-serif';
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
@@ -285,24 +286,12 @@ function draw() {
               {
                 console.log("nice throw loser, correct answer was " + eqlist[rocklist[i].eqpointer].answer + ", you answered: " + inpt.value);
                 ded=true;
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/game1", true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify({
-                    value: player.y
-                }));
               }
             }
             else
             {
               console.log("nice throw loser");
               ded=true;
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "/game1", true);
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.send(JSON.stringify({
-                  value: player.y
-              }));
             }
           }
         }
@@ -322,11 +311,27 @@ function draw() {
     ctx.strokeText(Math.round(Math.abs(player.y)),10,20)
     window.requestAnimationFrame(draw);
   }
-
+  else
+  {
+    if(first==true)
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/game1", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+          username: user,
+          value: Math.round(Math.abs(player.y))
+      }));
+      first=false;
+    }
+  }
 }
 
 function drawcanvas()
 {
+  user=document.getElementById("username").innerHTML;
+  console.log(user)
+  console.log("\n was user \n");
   c = document.getElementById("myCanvas");
   canvaswidth=c.width;
   ctx = c.getContext("2d");

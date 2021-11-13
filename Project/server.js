@@ -30,7 +30,7 @@ const dbConfig = {
 
 var db = pgp(dbConfig);
 
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
 
@@ -39,16 +39,29 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
 // Route to login page
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/Login/login.html');
+    res.render(__dirname + '/Login/login.ejs');
 });
 
 // Get entered user data from registry and insert into table
+app.post('/game1', (req, res) => {
+    let score = req.body.value;
+    let username=req.body.username;
+    console.log(username);
+    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    console.log(update);
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+        ]);
+    })
+});
+
 app.post('/Login/check', (req, res) => { 
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
     var taken = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"';";
-    var insert = "INSERT INTO user_table_better(username, pass_word, email) VALUES ('"+username+"','"+password+"','"+email+"') ON CONFLICT DO NOTHING";
+    var insert = "INSERT INTO user_table_better(username, pass_word, email, supervisor_variable, game1_score, game1_attempts,game2_score, game2_attempts,game3_score, game3_attempts,reported_variable ) VALUES ('"+username+"','"+password+"','"+email+"',0,0,0,0,0,0,0,0) ON CONFLICT DO NOTHING";
     db.task('get-everything', task =>{
         return task.batch([
             task.any(taken),
@@ -62,12 +75,15 @@ app.post('/Login/check', (req, res) => {
         if(result==0)
         {
             //worked, user is in the database, direct to the home page
-            res.sendFile(__dirname + '/Games/game_1/game1H.html');
+            res.render(__dirname + '/Games/game_1/game1H.ejs',{
+				user: username
+			})
+            console.log(username);
         }
         else
         {
             //failed, redirect to the login page and complain about the username being taken
-            res.sendFile(__dirname + '/Login/login.html');
+            res.render(__dirname + '/Login/login.ejs');
         }
     })
     
