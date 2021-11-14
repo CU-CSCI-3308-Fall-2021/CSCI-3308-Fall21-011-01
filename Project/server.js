@@ -96,23 +96,44 @@ app.post('/Login/login', (req, res) => { //login as current user
 app.post('/scores', (req, res) => { 
     let username=req.body.username;
     let sortby=req.body.sortby;
+    let requested=req.body.want;
     if(sortby==undefined)
     {
-        sortby="game1_score"
+        sortby="game1_score";
     }
-    var highScores1 = "SELECT * FROM user_table_better ORDER BY "+sortby+" DESC;";
+    if(requested==undefined)
+    {
+        requested="5";
+    }
+    requested=parseInt(requested);
+    var issuperuser = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' AND supervisor_variable = '1';";
+    var highScores1 = "SELECT * FROM user_table_better ORDER BY reported_variable, "+sortby+" DESC;";
     db.task('get-everything', task => {
 		return task.batch([
 			task.any(highScores1),
+            task.any(issuperuser)
 		]);
 	})
     .then(data => {
+        var supervise = data[1][0].count;
+        var length = data[0].length;
+        var end=requested;
         var display=[];
         var self;
         var rank=0;
+        const displayranks=[requested-4,requested-3,requested-2,requested-1,requested];
         for(i=0;i<5;i++)
         {
-            display[i]=Object.values(data[0][i])
+
+            if((data[0][i+requested-5])==undefined)
+            {
+                display[i]=["","","","","","","","","","",""]
+            }
+            else
+            {
+                display[i]=Object.values(data[0][i+requested-5])
+            }
+            
         }
         var found= false;
         i=0
@@ -126,11 +147,37 @@ app.post('/scores', (req, res) => {
             }
             i++
         }
+        var lastrow =[]
+        for(i=0;i<5;i++)
+        {
+            lastrow[i]=""
+        }
+        bonusname=""
+        if(supervise==1)
+        {
+            for(i=0;i<5;i++)
+            {
+                if(display[i][10]==1)
+                {
+                    lastrow[i]=" 1 <a class='btn btn-default' type='button' onclick="+"unreport('"+display[i][0]+"')"+"> unflag?  <span class='sr-only'>(current)</span></a>"
+                }
+                else
+                {
+                    lastrow[i]=" 0 <a class='btn btn-default' type='button' onclick="+"report('"+display[i][0]+"')"+"> flag?  <span class='sr-only'>(current)</span></a>"
+                }
+            }
+            bonusname="reported?"
+        }
         res.render(__dirname + '/Views/scores.ejs',{
             user: username,
+            bonusrow: lastrow,
+            report: bonusname,
             userplace: self,
             userrank: rank,
-            score: display
+            score: display,
+            maxsize: length,
+            max: end,
+            ranks:displayranks
         });
 	})
 
@@ -181,6 +228,17 @@ app.post('/game1', (req, res) => {
         return task.batch([
             task.any(update),
             task.any(incriment),
+        ]);
+    })
+});
+
+app.post('/report', (req, res) => { 
+    let changeval = req.body.to;
+    let username=req.body.username;
+    var update = "UPDATE user_table_better SET reported_variable = '"+changeval+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
         ]);
     })
 });

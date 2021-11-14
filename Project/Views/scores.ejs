@@ -147,8 +147,25 @@
 
 </div>  
 <!- trying something else-->
+<table hidden>
+  <tr>
+    <td id="maxsize"><%-maxsize%></td>
+    <td id="maxdisplayed"><%-max%></td>
+  </tr>
+</table>
+
 
 <table>
+  <tr>
+    <td><a class="btn btn-default" type="button" onclick="changeView(true)"> &#60;--  <span class="sr-only">(current)</span></a></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a class="btn btn-default" type="button" onclick="changeView(false)"> --&#62;  <span class="sr-only">(current)</span></a></td>
+  </tr>
   <tr>
     <td>Rank</td>
     <td>Username</td>
@@ -158,9 +175,10 @@
     <td>Flashcards attemts<a class="btn btn-default" type="button" onclick="sortBy('/scores','game2_attempts')">   \/  <span class="sr-only">(current)</span></a></td>
     <td>Riddles high score<a class="btn btn-default" type="button" onclick="sortBy('/scores','game3_score')">   \/  <span class="sr-only">(current)</span></a></td>
     <td>Riddles attempts<a class="btn btn-default" type="button" onclick="sortBy('/scores','game3_attempts')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td><%-report%></td>
   </tr>
   <tr>
-    <td>1</td>
+    <td><%-ranks[0]%></td>
     <td><%-score[0][0]%></td>
     <td><%-score[0][4]%></td>
     <td><%-score[0][5]%></td>
@@ -168,9 +186,10 @@
     <td><%-score[0][7]%></td>
     <td><%-score[0][8]%></td>
     <td><%-score[0][9]%></td>
+    <td><%-bonusrow[0]%></td>
   </tr>
   <tr>
-    <td>2</td>
+    <td><%-ranks[1]%></td>
     <td><%-score[1][0]%></td>
     <td><%-score[1][4]%></td>
     <td><%-score[1][5]%></td>
@@ -178,9 +197,10 @@
     <td><%-score[1][7]%></td>
     <td><%-score[1][8]%></td>
     <td><%-score[1][9]%></td>
+    <td><%-bonusrow[1]%></td>
   </tr>
   <tr>
-    <td>3</td>
+    <td><%-ranks[2]%></td>
     <td><%-score[2][0]%></td>
     <td><%-score[2][4]%></td>
     <td><%-score[2][5]%></td>
@@ -188,9 +208,10 @@
     <td><%-score[2][7]%></td>
     <td><%-score[2][8]%></td>
     <td><%-score[2][9]%></td>
+    <td><%-bonusrow[2]%></td>
   </tr>
   <tr>
-    <td>4</td>
+    <td><%-ranks[3]%></td>
     <td><%-score[3][0]%></td>
     <td><%-score[3][4]%></td>
     <td><%-score[3][5]%></td>
@@ -198,9 +219,10 @@
     <td><%-score[3][7]%></td>
     <td><%-score[3][8]%></td>
     <td><%-score[3][9]%></td>
+    <td><%-bonusrow[3]%></td>
   </tr>
   <tr>
-    <td>5</td>
+    <td><%-ranks[4]%></td>
     <td><%-score[4][0]%></td>
     <td><%-score[4][4]%></td>
     <td><%-score[4][5]%></td>
@@ -208,6 +230,7 @@
     <td><%-score[4][7]%></td>
     <td><%-score[4][8]%></td>
     <td><%-score[4][9]%></td>
+    <td><%-bonusrow[4]%></td>
   </tr>
   <tr>
     <td>...</td>
