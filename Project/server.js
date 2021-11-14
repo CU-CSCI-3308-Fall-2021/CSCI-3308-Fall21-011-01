@@ -38,26 +38,21 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
 
 // -----Route to LOGIN page-----
-
-app.get('/home', (req, res) => { //go to gome 
-    res.render(__dirname + '/Views/home');
-});
-
 app.get('/login', (req, res) => { //go to login page
     res.render(__dirname + '/Views/login');
 });
 
-
-// -- route to SCORES page---
-app.get('/scores', (req, res) => { 
-    res.render(__dirname + '/Views/scores.ejs');
+app.get('', (req, res) => { //go to login page
+    res.render(__dirname + '/Views/login');
 });
-
-
 
 // going to home page as user   
 app.post('/home', (req, res) => { 
     let username=req.body.username;
+    if(username=="no user")
+    {
+        res.render(__dirname + '/Views/login.ejs')
+    }
     res.render(__dirname + '/Views/home.ejs',{
         user: username
     });
@@ -69,10 +64,76 @@ app.post('/login', (req, res) => {
     });
 });
 
+app.post('/Login/login', (req, res) => { //login as current user
+    
+    let username = req.body.usrlogin;
+    let password = req.body.passlogin;
+    var queery = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' and pass_word = '"+password+"';";
+    db.task('get-everything', task =>{
+        return task.batch([
+            task.any(queery),
+        ]);
+    })
+    .then(data => {
+        result = data[0][0].count
+        if(result==0)
+        {
+            //failed, redirect to the login page and complain about not being in the database with that combo
+            res.render(__dirname + '/Views/login.ejs');
+        }
+        else
+        {
+            //worked send to home
+            res.render(__dirname + '/Views/home.ejs',{
+				user: username
+			})
+        }
+    })
+
+});
+
 // going to scores page
 app.post('/scores', (req, res) => { 
-    res.render(__dirname + '/Views/scores.ejs',{
-    });
+    let username=req.body.username;
+    let sortby=req.body.sortby;
+    if(sortby==undefined)
+    {
+        sortby="game1_score"
+    }
+    var highScores1 = "SELECT * FROM user_table_better ORDER BY "+sortby+" DESC;";
+    db.task('get-everything', task => {
+		return task.batch([
+			task.any(highScores1),
+		]);
+	})
+    .then(data => {
+        var display=[];
+        var self;
+        var rank=0;
+        for(i=0;i<5;i++)
+        {
+            display[i]=Object.values(data[0][i])
+        }
+        var found= false;
+        i=0
+        while(!found)
+        {   
+            if(Object.values(data[0][i])[0]==username)
+            {
+                self=Object.values(data[0][i]);
+                rank=i+1;
+                break;
+            }
+            i++
+        }
+        res.render(__dirname + '/Views/scores.ejs',{
+            user: username,
+            userplace: self,
+            userrank: rank,
+            score: display
+        });
+	})
+
 });
 
 // -- adds USER and redirects to HOME ----
@@ -91,9 +152,7 @@ app.post('/Login/check', (req, res) => {
         ]);
     })
     .then(data => {
-        result = data[0][0].count,
-        console.log(result)
-        console.log("printed in .then");
+        result = data[0][0].count
         if(result==0)
         {
             //worked, user is in the database, direct to the home page
@@ -110,102 +169,18 @@ app.post('/Login/check', (req, res) => {
     
 });
 
-
-//---- GAME 3-----
-
-app.get('/game3', (req, res) => {
-    res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
-});
-app.get('/game33.html', (req, res) => {
-    res.sendFile(path.join(__dirname, "Games/game_3/game33.html"));
-});
-
-
-
-//---- SCORES PAGE-----
-
-app.get('/scores/1topscores', function(req, res){
-    console.log("happen");
-    var highScores1 = "SELECT game1_score FROM user_table_better ORDER BY game1_score DESC LIMIT 5;";
-    db.task('get-everything', task => {
-		return task.batch([
-			task.any(highScores1),
-		]);
-	})
-    .then(data => {
-        console.log("poop:"+data[0].username);
-		res.render(__dirname + '/Views/scores.ejs',{
-			display: data[0]
-		})
-	})
-    .catch(err => {
-		// display error message in case an error
-			console.log('error', err);
-            res.render(__dirname + '/Views/scores.ejs');
-	});
-
-    
-
-
-});
-
-
-app.get('/scores/2topscores', function(req, res){
-    var highScores2 = "SELECT game2_score FROM user_table_better ORDER BY game2_score DESC LIMIT 5;";
-    db.task('get-everything', task => {
-		return task.batch([
-			task.any(highScores2),
-		]);
-	})
-    .then(data => {
-		// console.log(data);
-		res.render(__dirname + '/Views/scores.ejs',{
-			display: data[0]
-		})
-	})
-    .catch(err => {
-		// display error message in case an error
-			console.log('error', err);
-            res.render(__dirname + '/Views/scores.ejs');
-	});
-
-});
-
-
-app.get('/scores/3topscores', function(req, res){
-    var highScores3 = "SELECT game3_score FROM user_table_better ORDER BY game3_score DESC LIMIT 5;";
-    db.task('get-everything', task => {
-		return task.batch([
-			task.any(highScores3),
-		]);
-	})
-    .then(data => {
-		// console.log(data);
-		res.render(__dirname + '/Views/scores.ejs',{
-			display: data[0]
-		})
-	})
-    .catch(err => {
-		// display error message in case an error
-			console.log('error', err);
-            res.render(__dirname + '/Views/scores.ejs');
-	});
-
-});
-
-
-
-
 // -- GAME 1-----
 
 //inputting score
 app.post('/game1', (req, res) => { 
     let score = req.body.value;
     let username=req.body.username;
-    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"' AND game1_score < '"+score+"';"; //edit plays and highscore
+    var incriment = "UPDATE user_table_better SET game1_attempts=game1_attempts+1 WHERE username = '"+username+"';";
     db.task('update', task =>{
         return task.batch([
             task.any(update),
+            task.any(incriment),
         ]);
     })
 });
@@ -214,6 +189,13 @@ app.post('/game1', (req, res) => {
 app.post('/boatGame', (req, res) => {  //to boat game
     let username=req.body.username;
     res.render(__dirname + '/Views/game1H.ejs',{
+        user: username
+    });
+});
+
+app.post('/riddles', (req, res) => {  //to riddle game
+    let username=req.body.username;
+    res.render(__dirname + '/Views/game33.ejs',{
         user: username
     });
 });

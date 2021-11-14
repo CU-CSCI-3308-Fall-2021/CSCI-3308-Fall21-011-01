@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="../script/homesripts.js"></script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -59,7 +60,7 @@
       </li>
 
       <li class = "nav-item">
-          <a class="btn btn-default" type="button" onclick="redir('/login')">   Log Out  <span class="sr-only">(current)</span></a>
+          <a class="btn btn-default" type="button" onclick="redir('/login')">   logout  <span class="sr-only">(current)</span></a>
       </li>
 
     </ul>
@@ -80,7 +81,7 @@
           </button>
           
               <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
-              <a href="#" id="usernamedropdown">no user</a>
+              <a href="#" id="usernamedropdown"><%-user%></a>
               <a href="#">Settings</a>
               </div>
 
@@ -98,7 +99,7 @@
 <br /><br /><br /><br />
 
 <div class="container-fluid">
-
+<!-- trying something else->
 <div class="pt-2 row justify-content-center">
 
   <div class="card" style="width: 12rem; background-color: rgba(46, 109, 49, 0.3);" >
@@ -125,7 +126,7 @@
         <form method="get" action="/scores/2topscores/">
           <input class="" type="submit" name="game2sub" value="View Scores" id="game2viewscore"/>
        </form>
-       <!-- displays top 3 users -->
+
        
 
       </div>
@@ -139,13 +140,89 @@
         <form method="get" action="/scores/3topscores">
           <input class="" type="submit" name="game3sub" value="View Scores" id="game3viewscore"/>
        </form>
-       <!-- displays top 3 users -->
     
 
       </div>
   </div>
 
 </div>  
+<!- trying something else-->
+
+<table>
+  <tr>
+    <td>Rank</td>
+    <td>Username</td>
+    <td>Boat game high score <a class="btn btn-default" type="button" onclick="sortBy('/scores','game1_score')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td>Boat game attempts<a class="btn btn-default" type="button" onclick="sortBy('/scores','game1_attempts')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td>Flashcards high score<a class="btn btn-default" type="button" onclick="sortBy('/scores','game2_score')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td>Flashcards attemts<a class="btn btn-default" type="button" onclick="sortBy('/scores','game2_attempts')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td>Riddles high score<a class="btn btn-default" type="button" onclick="sortBy('/scores','game3_score')">   \/  <span class="sr-only">(current)</span></a></td>
+    <td>Riddles attempts<a class="btn btn-default" type="button" onclick="sortBy('/scores','game3_attempts')">   \/  <span class="sr-only">(current)</span></a></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><%-score[0][0]%></td>
+    <td><%-score[0][4]%></td>
+    <td><%-score[0][5]%></td>
+    <td><%-score[0][6]%></td>
+    <td><%-score[0][7]%></td>
+    <td><%-score[0][8]%></td>
+    <td><%-score[0][9]%></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><%-score[1][0]%></td>
+    <td><%-score[1][4]%></td>
+    <td><%-score[1][5]%></td>
+    <td><%-score[1][6]%></td>
+    <td><%-score[1][7]%></td>
+    <td><%-score[1][8]%></td>
+    <td><%-score[1][9]%></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td><%-score[2][0]%></td>
+    <td><%-score[2][4]%></td>
+    <td><%-score[2][5]%></td>
+    <td><%-score[2][6]%></td>
+    <td><%-score[2][7]%></td>
+    <td><%-score[2][8]%></td>
+    <td><%-score[2][9]%></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td><%-score[3][0]%></td>
+    <td><%-score[3][4]%></td>
+    <td><%-score[3][5]%></td>
+    <td><%-score[3][6]%></td>
+    <td><%-score[3][7]%></td>
+    <td><%-score[3][8]%></td>
+    <td><%-score[3][9]%></td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td><%-score[4][0]%></td>
+    <td><%-score[4][4]%></td>
+    <td><%-score[4][5]%></td>
+    <td><%-score[4][6]%></td>
+    <td><%-score[4][7]%></td>
+    <td><%-score[4][8]%></td>
+    <td><%-score[4][9]%></td>
+  </tr>
+  <tr>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td><%-userrank%></td>
+    <td><%-userplace[0]%></td>
+    <td><%-userplace[4]%></td>
+    <td><%-userplace[5]%></td>
+    <td><%-userplace[6]%></td>
+    <td><%-userplace[7]%></td>
+    <td><%-userplace[8]%></td>
+    <td><%-userplace[9]%></td>
+  </tr>
+</table>
 
 </div>
 

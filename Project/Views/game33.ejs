@@ -10,64 +10,64 @@
         <link rel="stylesheet" href="game33.css">
     </head>
     <body onload="startGame();">
+        <!-- NAVBAR -->
 
-        <div class="container">
-                
-<!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg bluebg navbar-light">
 
-            <nav class="navbar navbar-expand-lg bluebg navbar-light">
+        <div class="collapse navbar-collapse" id="navbarText">
 
-                <div class="collapse navbar-collapse" id="navbarText">
+         
+                <img class="bluebg rounded-circle"
+                src="../resources/brain.png"
+                alt="website icon"
+                id="icon"
+                width="90px"
+                >
+
+  
+            <ul class="navbar-nav mr-auto">
+  
+            <li class="nav-item active">
+              <a class="btn btn-default" type="button" onclick="redir('/home')">   Home   <span class="sr-only">(current)</span></a>
+            </li>
+  
+            <li class = "nav-item">
+                <a class="btn btn-default" type="button" onclick="redir('/login')">   logout  <span class="sr-only">(current)</span></a>
+            </li>
+
+          </ul>
+
+           
+
+        </div>
+
+        
+        
+        
+        <div class="form-inline my-2 my-lg-0">
             
+            <div class="dropdown">
                 
-                        <img class="bluebg rounded-circle"
-                        src="../resources/brain.png"
-                        alt="website icon"
-                        id="icon"
-                        width="90px"
-                        >
-            
-            
-                    <ul class="navbar-nav mr-auto">
-            
-                    <li class="nav-item active">
-                    <a class="btn btn-default" type="button" onclick="redir('/home')">   Home   <span class="sr-only">(current)</span></a>
-                    </li>
-            
-                    <li class = "nav-item">
-                        <a class="btn btn-default" type="button" onclick="redir('/login')">   Log Out  <span class="sr-only">(current)</span></a>
-                    </li>
-            
-                </ul>
-            
+                <button onclick="dropdownfunc()" class="btn btn-default">
+                    <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+                </button>
                 
-            
-                </div>
-            
-                
-                
-                
-                <div class="form-inline my-2 my-lg-0">
-                    
-                    <div class="dropdown">
-                        
-                        <button onclick="dropdownfunc()" class="btn btn-default">
-                            <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
-                        </button>
-                        
-                            <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
-                            <a href="#" id="usernamedropdown">no user</a>
-                            <a href="#">Settings</a>
-                            </div>
-            
+                    <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+                    <a href="#" id="usernamedropdown"><%-user%></a>
+                    <a href="#">Settings</a>
                     </div>
-            
-                </div>
-            
+
             </div>
-            
-            
-            </nav>
+
+        </div>
+
+      </div>
+ 
+
+    </nav>
+
+    <!--- END NAVBAR -->
+        <div class="container">
             <div id="game" class="justify-center flex-column">
                 <div id="hud">
                     

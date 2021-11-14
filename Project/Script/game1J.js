@@ -330,6 +330,7 @@ function draw() {
           value: Math.round(Math.abs(player.y))
       }));
       first=false;
+      /////add a creation of a retry button that reports the score(just shown here as value) and then does a redir('/boatGame') when you click retry
     }
   }
 }
