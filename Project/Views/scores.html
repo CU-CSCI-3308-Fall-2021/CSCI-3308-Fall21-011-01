@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Scores</title>
+    <title>Leaderboards</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -30,147 +30,127 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" type="text/css" href="login.css" />
+    <link rel="stylesheet" type="text/css" href="../Style/login.css" />
+    <link rel="stylesheet" type="text/css" href="../Style/styles.css" />
 
-    <!-- STYLE STUFF -->
-    <style>
-
-        .fortycol {
-          width: 35%;
-        }
-    
-        .sixtycol {
-          width: 65%;
-          float:right;
-        }
-  
-        .coolimg {
-          border: 20px solid rgba(46, 109, 49, 0.3);
-          border-radius: 30%;
-        }
-  
-        .padtop{
-          padding-top: 3%
-        }
-  
-        .padbot{
-          padding-bottom: 1%
-        }
-  
-        .bluebg{
-          background-color: rgb(108, 136, 158)
-        }
-
-        .orangebg{
-          background-color: rgb(243, 186, 112)
-        }
-
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
-
-        .brand-centered {
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-        }
-
-        .logincontainer{
-            width:25%;
-        }
-
-        .loginwidth{
-            width:5%;
-        }
-
-        .slightrounded{
-            border-radius:20%;
-        }
-  
-      </style>
-  
   </head>
 
-  <body>
+<body>
     
-    <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-    <nav class="navbar navbar-expand-lg bluebg navbar-light">
+<nav class="navbar navbar-expand-lg bluebg navbar-light">
 
-      <div class="collapse navbar-collapse" id="navbarText">
+  <div class="collapse navbar-collapse" id="navbarText">
 
-       
-              <img class="bluebg rounded-circle"
-              src="../resources/brain.png"
-              alt="website icon"
-              id="icon"
-              width="90px"
-              >
+   
+          <img class="bluebg rounded-circle"
+          src="../resources/brain.png"
+          alt="website icon"
+          id="icon"
+          width="90px"
+          >
 
 
-          <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto">
 
-          <li class="nav-item active">
-            <a class="nav-link" href="../Views/home.html">Home <span class="sr-only">(current)</span></a>
-          </li>
+      <li class="nav-item active">
+        <a class="btn btn-default" type="button" onclick="redir('/home')">   Home   <span class="sr-only">(current)</span></a>
+      </li>
 
-          <li class = "nav-item">
-              <a class="nav-link" href="../Views/login.ejs">Login</a>
-          </li>
+      <li class = "nav-item">
+          <a class="btn btn-default" type="button" onclick="redir('/login')">   Log Out  <span class="sr-only">(current)</span></a>
+      </li>
 
-          </ul>
+    </ul>
 
+     
+
+  </div>
+
+  
+  
+  
+  <div class="form-inline my-2 my-lg-0">
+      
+      <div class="dropdown">
+          
+          <button onclick="dropdownfunc()" class="btn btn-default">
+              <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+          </button>
+          
+              <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+              <a href="#" id="usernamedropdown">no user</a>
+              <a href="#">Settings</a>
+              </div>
+
+      </div>
+
+  </div>
+
+</div>
+
+
+</nav>
+
+<!--- END NAVBAR -->
+
+<br /><br /><br /><br />
+
+<div class="container-fluid">
+
+<div class="pt-2 row justify-content-center">
+
+  <div class="card" style="width: 12rem; background-color: rgba(46, 109, 49, 0.3);" >
+    <img class="card-img-top" src="https://p.kindpng.com/picc/s/499-4990545_transparent-barco-clipart-boat-hd-png-download.png" alt="Card image cap">
+
+        <div class="card-body">
+          <h5 class="card-title">Boat Game</h5>
+
+          <form method="get" action="/scores/1topscores/">
+            <input class="" type="submit" name="game1sub" value="View Scores" id="game1viewscore"/>
+          </form>
+          <p>username: score</p>
+          <p><&- display</p>
          
 
-      </div>
 
-      
-      <div class="form-inline my-2 my-lg-0">
-          
-          <div class="dropdown">
-              
-              <button onclick="dropdownfunc()" class="btn btn-default">
-                  <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
-              </button>
-              
-                  <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
-                  <a href="#" id="usernamedropdown">Username</a>
-                  <a href="#">Settings</a>
-                  </div>
+        </div>
+         
+  </div>
 
-          </div>
+
+  <div class="card" style="width: 12rem; background-color: rgba(46, 109, 49, 0.3);">
+      <img class="card-img-top" src="../resources/flashxard.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Flashcards</h5>
+
+        <form method="get" action="/scores/2topscores/">
+          <input class="" type="submit" name="game2sub" value="View Scores" id="game2viewscore"/>
+       </form>
 
       </div>
+  </div>
 
-    </div>
+  <div class="card" style="width: 12rem; background-color: rgba(46, 109, 49, 0.3);">
+      <img class="card-img-top" src="../resources/ok.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Riddles</h5>
 
+        <form method="get" action="/scores/3topscores/">
+          <input class="" type="submit" name="game3sub" value="View Scores" id="game3viewscore"/>
+       </form>
 
-  </nav>
+      </div>
+  </div>
 
+</div>  
 
-
-    <br /><br /><br /><br />
-
-
-
-
-
-
-
+</div>
 
 
 
 
 </body>
-</html>
+
+<script src="../script/login.js"></script>

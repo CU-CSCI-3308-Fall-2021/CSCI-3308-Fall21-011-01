@@ -33,51 +33,33 @@ var db = pgp(dbConfig);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
-// --- HOME PAGHR -----
+
+//--- APP GET AND POST THINGS------------------------------------------
 
 
+// -----Route to LOGIN page-----
 
-// -------- Login Page: --------------
-
-// Route to login page
 app.get('/login', (req, res) => { //go to login page
     res.render(__dirname + '/Views/login');
 });
 
-// Get entered user data from registry and insert into table
 
-
-app.post('/game1', (req, res) => { //input score, half implemented
-    let score = req.body.value;
-    let username=req.body.username;
-    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
-    db.task('update', task =>{
-        return task.batch([
-            task.any(update),
-        ]);
-    })
-});
-
-app.post('/home', (req, res) => { //input score, half implemented
+// going to home page as user   
+app.post('/home', (req, res) => { 
     let username=req.body.username;
     res.render(__dirname + '/Views/home.ejs',{
         user: username
     });
 });
 
-app.post('/login', (req, res) => { //input score, half implemented
+// going to login page
+app.post('/login', (req, res) => { 
     res.render(__dirname + '/Views/login.ejs',{
     });
 });
 
-app.post('/boatGame', (req, res) => {  //to boat game
-    let username=req.body.username;
-    res.render(__dirname + '/Views/game1H.ejs',{
-        user: username
-    });
-});
-
-app.post('/Login/check', (req, res) => {  //add user and redirect to home
+// -- adds USER and redirects to HOME ----
+app.post('/Login/check', (req, res) => {  
 
     let username = req.body.username;
     let password = req.body.password;
@@ -111,39 +93,8 @@ app.post('/Login/check', (req, res) => {  //add user and redirect to home
     
 });
 
-app.post('/Login/login', (req, res) => { //currently disabled
-    
-    let username = req.body.usrlogin;
-    let password = req.body.passlogin;
-    console.log("user: "+String(username)+" is trying to login with pass: "+ String(password)+" \n \n");
-    var queery = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' and pass_word = '"+password+"';";
-    db.task('get-everything', task =>{
-        return task.batch([
-            task.any(queery),
-        ]);
-    })
-    .then(data => {
-        result = data[0][0].count,
-        console.log(result)
-        console.log("printed in .then");
-        if(result==0)
-        {
-            //failed, redirect to the login page and complain about not being in the database with that combo
-            res.render(__dirname + '/Views/login.ejs');
-        }
-        else
-        {
-            //worked send to home
-            res.render(__dirname + '/Views/home.ejs',{
-				user: username
-			})
-        }
-    })
 
-});
-
-
-// --------- Game 3: ------------
+//---- GAME 3-----
 
 app.get('/game3', (req, res) => {
     res.sendFile(path.join(__dirname, "Games/game_3/game3.html"));
@@ -153,11 +104,79 @@ app.get('/game33.html', (req, res) => {
 });
 
 
+
+//---- SCORES PAGE-----
+
+app.post('/scores/1topscores', function(req, res){
+    var highScores1 = "SELECT game1_score FROM user_table_better ORDER BY game1_score DESC LIMIT 5;";
+    db.task('get-everything', task => {
+		return task.batch([
+			task.any(highScores1),
+		]);
+	})
+
+
+});
+
+
+app.get('/scores/2topscores', function(req, res){
+    var highScores2 = "SELECT game2_score FROM user_table_better ORDER BY game2_score DESC LIMIT 5;";
+    db.task('get-everything', task => {
+		return task.batch([
+			task.any(highScores2),
+		]);
+	})
+    .then(data => {
+		// console.log(data);
+		res.render('/views/scores.ejs',{
+			display: data[0]
+		})
+	})
+    .catch(err => {
+		// display error message in case an error
+			console.log('error', err);
+            res.render('/views/scores.ejs');
+	});
+
+});
+
+
+app.post('/scores/3topscores', function(req, res){
+    var highScores3 = "SELECT game3_score FROM user_table_better ORDER BY game3_score DESC LIMIT 5;";
+    db.task('get-everything', task => {
+		return task.batch([
+			task.any(highScores3),
+		]);
+	})
+
+
+});
+
+
+
+
+// -- GAME 1-----
+
+//inputting score
+app.post('/game1', (req, res) => { 
+    let score = req.body.value;
+    let username=req.body.username;
+    var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"';"; //edit plays and highscore
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+        ]);
+    })
+});
+
+// 
+app.post('/boatGame', (req, res) => {  //to boat game
+    let username=req.body.username;
+    res.render(__dirname + '/Views/game1H.ejs',{
+        user: username
+    });
+});
+
+
 app.listen(3000);
 
-// TO DO:
-
-// app get for scores page
-// app post for scores
-
-// app get and post for game 1 2 3

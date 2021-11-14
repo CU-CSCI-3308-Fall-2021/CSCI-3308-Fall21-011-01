@@ -179,3 +179,7 @@
             border-radius: 3px 0 0 3px;
           }
 
+          .card{
+            margin-left:10px;
+            margin-right:10px;
+          }
