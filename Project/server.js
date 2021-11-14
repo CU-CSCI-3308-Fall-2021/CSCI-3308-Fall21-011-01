@@ -39,9 +39,20 @@ app.use(express.static(__dirname + '/'));//This line is necessary for us to use 
 
 // -----Route to LOGIN page-----
 
+app.get('/home', (req, res) => { //go to gome 
+    res.render(__dirname + '/Views/home');
+});
+
 app.get('/login', (req, res) => { //go to login page
     res.render(__dirname + '/Views/login');
 });
+
+
+// -- route to SCORES page---
+app.get('/scores', (req, res) => { 
+    res.render(__dirname + '/Views/scores.ejs');
+});
+
 
 
 // going to home page as user   
@@ -55,6 +66,12 @@ app.post('/home', (req, res) => {
 // going to login page
 app.post('/login', (req, res) => { 
     res.render(__dirname + '/Views/login.ejs',{
+    });
+});
+
+// going to scores page
+app.post('/scores', (req, res) => { 
+    res.render(__dirname + '/Views/scores.ejs',{
     });
 });
 
@@ -107,13 +124,27 @@ app.get('/game33.html', (req, res) => {
 
 //---- SCORES PAGE-----
 
-app.post('/scores/1topscores', function(req, res){
+app.get('/scores/1topscores', function(req, res){
+    console.log("happen");
     var highScores1 = "SELECT game1_score FROM user_table_better ORDER BY game1_score DESC LIMIT 5;";
     db.task('get-everything', task => {
 		return task.batch([
 			task.any(highScores1),
 		]);
 	})
+    .then(data => {
+        console.log("poop:"+data[0].username);
+		res.render(__dirname + '/Views/scores.ejs',{
+			display: data[0]
+		})
+	})
+    .catch(err => {
+		// display error message in case an error
+			console.log('error', err);
+            res.render(__dirname + '/Views/scores.ejs');
+	});
+
+    
 
 
 });
@@ -128,27 +159,37 @@ app.get('/scores/2topscores', function(req, res){
 	})
     .then(data => {
 		// console.log(data);
-		res.render('/views/scores.ejs',{
+		res.render(__dirname + '/Views/scores.ejs',{
 			display: data[0]
 		})
 	})
     .catch(err => {
 		// display error message in case an error
 			console.log('error', err);
-            res.render('/views/scores.ejs');
+            res.render(__dirname + '/Views/scores.ejs');
 	});
 
 });
 
 
-app.post('/scores/3topscores', function(req, res){
+app.get('/scores/3topscores', function(req, res){
     var highScores3 = "SELECT game3_score FROM user_table_better ORDER BY game3_score DESC LIMIT 5;";
     db.task('get-everything', task => {
 		return task.batch([
 			task.any(highScores3),
 		]);
 	})
-
+    .then(data => {
+		// console.log(data);
+		res.render(__dirname + '/Views/scores.ejs',{
+			display: data[0]
+		})
+	})
+    .catch(err => {
+		// display error message in case an error
+			console.log('error', err);
+            res.render(__dirname + '/Views/scores.ejs');
+	});
 
 });
 
