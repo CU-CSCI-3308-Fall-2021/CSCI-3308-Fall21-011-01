@@ -89,7 +89,6 @@ app.post('/Login/login', (req, res) => { //login as current user
 			})
         }
     })
-
 });
 
 // going to scores page
@@ -97,7 +96,6 @@ app.post('/scores', (req, res) => {
     let username=req.body.username;
     let sortby=req.body.sortby;
     let requested=req.body.want;
-
     if(sortby==undefined)
     {
         sortby="game1_score";
@@ -106,18 +104,15 @@ app.post('/scores', (req, res) => {
     {
         requested="5";
     }
-
     requested=parseInt(requested);
     var issuperuser = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' AND supervisor_variable = '1';";
     var highScores1 = "SELECT * FROM user_table_better ORDER BY reported_variable, "+sortby+" DESC;";
-
     db.task('get-everything', task => {
 		return task.batch([
 			task.any(highScores1),
             task.any(issuperuser)
 		]);
 	})
-    
     .then(data => {
         var supervise = data[1][0].count;
         var length = data[0].length;
@@ -172,7 +167,7 @@ app.post('/scores', (req, res) => {
             }
             bonusname="reported?"
         }
-        res.render(__dirname + '/Views/scores.ejs',{
+        res.render(__dirname + '/Views/scores_combined.ejs',{
             user: username,
             bonusrow: lastrow,
             report: bonusname,
@@ -181,7 +176,139 @@ app.post('/scores', (req, res) => {
             score: display,
             maxsize: length,
             max: end,
-            ranks:displayranks
+            ranks:displayranks,
+            lastsort: sortby
+        });
+	})
+
+});
+
+app.post('/scoresB', (req, res) => { 
+    let username=req.body.username;
+    let requested1=req.body.want1;
+    let requested2=req.body.want2;
+    let requested3=req.body.want3;
+    if(requested1==undefined)
+    {
+        requested1="5";
+    }
+    if(requested2==undefined)
+    {
+        requested2="5";
+    }
+    if(requested3==undefined)
+    {
+        requested3="5";
+    }
+    requested=[parseInt(requested1),parseInt(requested2),parseInt(requested3)]
+    var highScores1 = "SELECT * FROM user_table_better ORDER BY reported_variable, game1_score DESC;";
+    var highScores2 = "SELECT * FROM user_table_better ORDER BY reported_variable, game2_score DESC;";
+    var highScores3 = "SELECT * FROM user_table_better ORDER BY reported_variable, game3_score DESC;";
+    db.task('get-everything', task => {
+		return task.batch([
+			task.any(highScores1),
+            task.any(highScores2),
+            task.any(highScores3)
+		]);
+	})
+    .then(data => {
+        var length = data[0].length;
+        var end1=requested[0];
+        var end2=requested[1];
+        var end3=requested[2];
+        var display1=[];
+        var display2=[];
+        var display3=[];
+        const displayranks1=[requested[0]-4,requested[0]-3,requested[0]-2,requested[0]-1,requested[0]];
+        const displayranks2=[requested[1]-4,requested[1]-3,requested[1]-2,requested[1]-1,requested[1]];
+        const displayranks3=[requested[2]-4,requested[2]-3,requested[2]-2,requested[2]-1,requested[2]];
+        for(i=0;i<5;i++)
+        {
+            if((data[0][i+requested[0]-5])==undefined)
+            {
+                display1[i]=["","","","","","","","","","",""]
+            }
+            else
+            {
+                display1[i]=Object.values(data[0][i+requested[0]-5])
+            }
+        }
+        for(i=0;i<5;i++)
+        {
+            if((data[1][i+requested[1]-5])==undefined)
+            {
+                display2[i]=["","","","","","","","","","",""]
+            }
+            else
+            {
+                display2[i]=Object.values(data[1][i+requested[1]-5])
+            }
+        }
+        for(i=0;i<5;i++)
+        {
+            if((data[2][i+requested[2]-5])==undefined)
+            {
+                display3[i]=["","","","","","","","","","",""]
+            }
+            else
+            {
+                display3[i]=Object.values(data[2][i+requested[2]-5])
+            }
+        }
+        var found= false;
+        i=0
+        while(!found)
+        {   
+            if(Object.values(data[0][i])[0]==username)
+            {
+                self1=Object.values(data[0][i]);
+                rank1=i+1;
+                break;
+            }
+            i++
+        }
+        var found= false;
+        i=0
+        while(!found)
+        {   
+            if(Object.values(data[1][i])[0]==username)
+            {
+                self2=Object.values(data[1][i]);
+                rank2=i+1;
+                break;
+            }
+            i++
+        }
+        var found= false;
+        i=0
+        while(!found)
+        {   
+            if(Object.values(data[2][i])[0]==username)
+            {
+                self3=Object.values(data[2][i]);
+                rank3=i+1;
+                break;
+            }
+            i++
+        }
+        res.render(__dirname + '/Views/scores.ejs',{
+            user: username,
+            userplace1: self1,
+            userplace2: self2,
+            userplace3: self3,
+            userrank1: rank1,
+            userrank2: rank2,
+            userrank3: rank3,
+            score1: display1,
+            score2: display2,
+            score3: display3,
+            maxsize: length,
+            max1: end1,
+            max2: end2,
+            max3: end3,
+            ranks1:displayranks1,
+            ranks2:displayranks2,
+            ranks3:displayranks3,
         });
 	})
 
@@ -228,6 +355,19 @@ app.post('/game1', (req, res) => {
     let username=req.body.username;
     var update = "UPDATE user_table_better SET game1_score = '"+score+"' WHERE username = '"+username+"' AND game1_score < '"+score+"';"; //edit plays and highscore
     var incriment = "UPDATE user_table_better SET game1_attempts=game1_attempts+1 WHERE username = '"+username+"';";
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+            task.any(incriment),
+        ]);
+    })
+});
+
+app.post('/game3', (req, res) => { 
+    let score = req.body.value;
+    let username=req.body.username;
+    var update = "UPDATE user_table_better SET game3_score = '"+score+"' WHERE username = '"+username+"' AND game3_score < '"+score+"';"; //edit plays and highscore
+    var incriment = "UPDATE user_table_better SET game3_attempts=game3_attempts+1 WHERE username = '"+username+"';";
     db.task('update', task =>{
         return task.batch([
             task.any(update),
