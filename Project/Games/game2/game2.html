@@ -25,6 +25,12 @@
         .buttonSubmit {
             background-color: #4CAF50;
         }
+        .buttonSend {
+            background-color: #e2b663;
+        }
+        .buttonR {
+            background-color: #4CAF50;
+        }
         p {
             text-align: center;
         }
@@ -44,7 +50,7 @@
     Game 2
 </title>
 
-<body onload="showGame('game', 0); showGame('next', 0); showGame('restart-btn', 0);">
+<body onload="showGame('game', 0); showGame('next', 0); showGame('restart-btn', 0); showGame('send-btn', 0); showGame('newGame-btn', 0);">
     <h1>Game 2: Math Flashcards</h1>
     <h2>Rules of the game:</h2>
     <h3>1. Two numbers will pop up on the screen in front of you with one of the following conjections: *, +, -</h3>
@@ -86,8 +92,10 @@
         
     </div>
 
-    <p><button class="button buttonRestart" id="restart-btn" onclick="runGame()">Restart</button></p>
+    <p><button class="button buttonRestart" id="restart-btn" onclick="runGame()">Restart Level</button></p>
         <p align = "margin-right" id="next"><button class="button buttonNext" id="next-btn" onclick="nextLevel()">Next Level</button></p>
+        <p align = "margin-right" id="next"><button class="button buttonR" id="newGame-btn" onclick="newGame()">Restart</button></p>
+        <p align = "margin-right" id="next"><button class="button buttonSend" id="send-btn" onclick="pushScores()">Finish</button></p>
 
     <p>
         <button class="button buttonStart" id="start-btn" onclick="showGame('game', 1); runGame();">Start!</button>
@@ -99,5 +107,5 @@
    
 
 </body>
-<script src="../SourceCode/game2.js"></script>
+<script src="../../Script/game2.js"></script>
 </html>

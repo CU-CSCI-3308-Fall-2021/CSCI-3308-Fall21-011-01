@@ -363,6 +363,19 @@ app.post('/game1', (req, res) => {
     })
 });
 
+app.post('/game2', (req, res) => { 
+    let score = req.body.value;
+    let username=req.body.username;
+    var update = "UPDATE user_table_better SET game2_score = '"+score+"' WHERE username = '"+username+"' AND game2_score < '"+score+"';"; //edit plays and highscore
+    var incriment = "UPDATE user_table_better SET game2_attempts=game2_attempts+1 WHERE username = '"+username+"';";
+    db.task('update', task =>{
+        return task.batch([
+            task.any(update),
+            task.any(incriment),
+        ]);
+    })
+});
+
 app.post('/game3', (req, res) => { 
     let score = req.body.value;
     let username=req.body.username;

@@ -166,6 +166,7 @@ function checkNext(){
         if (Level == 3){
             alert("Congratulations! You have completed all the levels!");
             showGame('restart-btn', 1);
+            showGame('send-btn', 1);
         }
         else{
             alert("Congratulations! You passed level " + Level);
@@ -188,5 +189,26 @@ function nextLevel(){
     showGame('contain', 1);
     runGame();
     document.getElementById("gameScore").innerHTML = gameScore;
+}
+
+function pushScores(){
+    console.log("in push scores");
+    var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/game2", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+          username: user,
+          value: gameScore
+      }));
+      showGame('newGame-btn', 1);
+}
+
+function newGame(){
+    gameScore = 0;
+    Level = 1;
+    showGame('game', 1);
+    showGame('next-btn', 0);
+    showGame('contain', 1);
+    runGame();
 }
 
