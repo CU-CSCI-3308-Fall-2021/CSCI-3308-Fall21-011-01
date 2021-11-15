@@ -492,7 +492,7 @@ function checkRight4(){
 
 var timer = document.getElementById('time');
 var timerID = setInterval(countDown, 1000);
-var current_time = 1 * 10;
+var current_time = 1 * 60;
 var min;
 var sec;
 function sleep(ms) {
