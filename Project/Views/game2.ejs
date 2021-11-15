@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+    <style>
+        .button {
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .buttonStart {
+            background-color: #4CAF50;
+        }
+        .buttonRestart {
+            background-color: #eee787;
+        }
+        .buttonNext {
+            background-color: #6fb9d6;
+        }
+        .buttonSubmit {
+            background-color: #4CAF50;
+        }
+        p {
+            text-align: center;
+        }
+        table.center {
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        
+        .jumbotron {
+            background-color: #c192ca;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            height: 300px;
+        } 
+    </style>
+<title>
+    Game 2
+</title>
+
+
+<body onload="showGame('game', 0); showGame('next', 0); showGame('restart-btn', 0);">
+
+    <%- include ('nvbar.ejs') %>
+
+    <h1>Game 2: Math Flashcards</h1>
+    <h2>Rules of the game:</h2>
+    <h3>1. Two numbers will pop up on the screen in front of you with one of the following conjections: *, +, -</h3>
+    <h3>2. You will have 30 seconds to answer as many problems as you can before time runs out. If you answer enough problems correctly, you will be able to move to the next level. There are 3 levels.</h3>
+    <h3>3. If you get a problem wrong, a try again message will display across the screen. You will not get to move on to the next problem until you have answered the problem correctly.</h3>
+    <h3>4. In order to check your answer, you must click the check button on the screen.</h3>
+    
+    <div class = "jumbotron" id = "contain">
+    <div id="game">
+        <p id="some_div"></p>
+        <table class = "center">
+            <tr>
+                <td>Level Score:</td>
+                <td></td><td></td>
+                <td>Level:</td>
+                <td></td><td></td>
+                <td>Game Score:</td>
+            </tr>
+            <tr>
+                <td id = "levelScore" align="center"></td>
+                <td></td><td></td>
+                <td id = "currLevel" align="center"></td>
+                <td></td><td></td>
+                <td id = "gameScore" align="center"></td>
+            </tr>
+        </table>
+
+        <table class = "center">
+            <tr>
+                <td id ="firstNum"></td>
+                <td id = "mathSymbol"></td> 
+                <td id = "secondNum"></td>
+                <td> = </td>
+                <td><input type="text" id="answer" name="answer"></td>
+                <td><button class="button buttonSubmit" id="submit-btn" onclick="checkAnswer(document.getElementById('answer').value)">Submit</button></td>
+                
+            </tr>
+        </table>
+        
+    </div>
+
+    <p><button class="button buttonRestart" id="restart-btn" onclick="runGame()">Restart</button></p>
+        <p align = "margin-right" id="next"><button class="button buttonNext" id="next-btn" onclick="nextLevel()">Next Level</button></p>
+
+    <p>
+        <button class="button buttonStart" id="start-btn" onclick="showGame('game', 1); runGame();">Start!</button>
+    </p>
+    </div>
+   
+    
+
+   
+
+</body>
+<script src="../script/game2.js"></script>
+</html>

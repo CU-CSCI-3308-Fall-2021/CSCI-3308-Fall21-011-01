@@ -39,60 +39,8 @@
     
     <!-- NAVBAR -->
 
-    <nav class="navbar navbar-expand-lg bluebg navbar-light">
-
-        <div class="collapse navbar-collapse" id="navbarText">
-
-         
-                <img class="bluebg rounded-circle"
-                src="../resources/brain.png"
-                alt="website icon"
-                id="icon"
-                width="90px"
-                >
-
-  
-            <ul class="navbar-nav mr-auto">
-  
-            <li class="nav-item active">
-              <a class="nav-link" href="../Views/home.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-  
-            <li class = "nav-item">
-                <a class="nav-link" href="../Views/login.html">Login</a>
-            </li>
-
-          </ul>
-
-           
-
-        </div>
-
-        
-        
-        
-        <div class="form-inline my-2 my-lg-0">
-            
-            <div class="dropdown">
-                
-                <button onclick="dropdownfunc()" class="btn btn-default">
-                    <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
-                </button>
-                
-                    <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
-                    <a href="#" id="usernamedropdown">Username</a>
-                    <a href="#">Settings</a>
-                    </div>
-
-            </div>
-
-        </div>
-
-      </div>
- 
-
-    </nav>
-
+    <%- include ('nvbar.ejs') %>
+    
     <!--- END NAVBAR -->
     
     <div class="pt-5 container">   </div>

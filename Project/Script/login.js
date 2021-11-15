@@ -10,8 +10,9 @@ function openModal() {
     var match = document.getElementById("match");
   
     // When the user starts to type something inside the password field
+
+    // make sure there is lowercase and number
     myInput.onkeyup = function () {
-     // console.log(letter.classList);
   
   
       var lowerCaseLetters = /[a-z]/g; 
@@ -35,13 +36,7 @@ function openModal() {
         number.classList.remove("valid");
         number.classList.add("invalid");
       }
-     
-    };
-
-    confirmMyInput.onkeyup = function () {
-  
-
-      if (myInput.value == confirmMyInput.value) {
+      if (myInput.value === confirmMyInput.value) {
         match.classList.remove("invalid");
         match.classList.add("valid");
       } else {
@@ -49,25 +44,46 @@ function openModal() {
         match.classList.add("invalid");
       }
 
-      //enableButton(letter, capital, number, length);
+      enableButton(letter,number,match);
+     
+    };
+
+    confirmMyInput.onkeyup = function () {
+  
+
+      if (myInput.value === confirmMyInput.value) {
+        match.classList.remove("invalid");
+        match.classList.add("valid");
+      } else {
+        match.classList.remove("valid");
+        match.classList.add("invalid");
+      }
+
+      enableButton(letter,number,match);
+
+
     };
 
   }
   
-  function enableButton(letter, capital, number, length, match) {
+  function enableButton(letter, number,match) {
+
+    //console.log("ok");
     
     var button = document.getElementById("submitbutton");
     
-    if (letter.classList.contains("valid") == true &&  number.classList.contains("valid") ) {
-      //button.disabled = false;
-      
+    if (letter.classList.contains("valid") == true &&  number.classList.contains("valid") == true && match.classList.contains("valid")) {
+
+      button.disabled = false;
+      button.style.backgroundColor = "green";
+
+    }else{
+      button.disabled = true;
+      button.style.backgroundColor = "gray";
     } 
   
   } 
   
-  function onClickFunction() {
-    alert("Hey! I'm all green! Well done.");
-  }
   
   // dropdown btn
   function dropdownfunc() {
