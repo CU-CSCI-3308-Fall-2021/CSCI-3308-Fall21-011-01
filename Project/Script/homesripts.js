@@ -1,4 +1,3 @@
-
 // so we can redirect with POST request in order to keep the current user logged in
 function redir(path, method='POST') {
     user=document.getElementById("usernamedropdown").innerHTML
@@ -45,6 +44,7 @@ function redir(path, method='POST') {
     maxsize=parseInt(document.getElementById("maxsize").innerHTML)
     maxsize=Math.ceil(maxsize/5)*5
     currsize=parseInt(document.getElementById("maxdisplayed").innerHTML)
+    lastsort=document.getElementById("sorting").innerHTML
     if(change==true)
     {
       if(left)
@@ -64,7 +64,7 @@ function redir(path, method='POST') {
         currsize=maxsize
       }
     }
-    sortBy('/scores','game1_score',currsize);
+    sortBy('/scores',lastsort,currsize);
   }
 
   // for supervisor, makes it so you can alter  and refresh the webpage, toggles reported var in datbase
@@ -93,7 +93,6 @@ function redir(path, method='POST') {
   }
 
   function showtable(){
-    console.log("happen");
     var table = document.getElementById("nerdtable");
     
     if(table.style.display == "block"){
@@ -101,5 +100,64 @@ function redir(path, method='POST') {
     }else{
       table.style.display = "block";
     }
+  }
+
+
+  function sortByB(path,want=[5,5,5],method='POST') {
+    user=document.getElementById("usernamedropdown").innerHTML
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+    const hiddenField = document.createElement('input');
+    hiddenField.type = 'hidden';
+    hiddenField.name = 'username';
+    hiddenField.value = user;
+    form.appendChild(hiddenField);
+    const wanted1 = document.createElement('input');
+    wanted1.type = 'hidden';
+    wanted1.name = 'want1';
+    wanted1.value = want[0];
+    form.appendChild(wanted1);
+    const wanted2 = document.createElement('input');
+    wanted2.type = 'hidden';
+    wanted2.name = 'want2';
+    wanted2.value = want[1];
+    form.appendChild(wanted2);
+    const wanted3 = document.createElement('input');
+    wanted3.type = 'hidden';
+    wanted3.name = 'want3';
+    wanted3.value = want[2];
+    form.appendChild(wanted3);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  function changeViewB(left,which,change=true)
+  {
+    maxsize=parseInt(document.getElementById("maxsize").innerHTML)
+    maxsize=Math.ceil(maxsize/5)*5
+    arrayguy=[parseInt(document.getElementById("maxdisplayed1").innerHTML),parseInt(document.getElementById("maxdisplayed2").innerHTML),parseInt(document.getElementById("maxdisplayed3").innerHTML)]
+    currsize=arrayguy[which];
+    if(change==true)
+    {
+      if(left)
+      {
+        currsize-=5;
+      }
+      else
+      {
+        currsize+=5;
+      }
+      if(currsize<5)
+      {
+        currsize=5;
+      }
+      if(currsize>maxsize)
+      {
+        currsize=maxsize
+      }
+    }
+    arrayguy[which]=currsize;
+    sortByB('/scoresB',arrayguy);
   }
   
