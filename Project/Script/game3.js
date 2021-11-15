@@ -125,6 +125,20 @@ let level5 = [
 const SCORE_POINTS = 100
 const MAX_QUESTIONS = 4
 
+function redir(path, method='POST') {
+    user=document.getElementById("usernamedropdown").innerHTML
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+    const hiddenField = document.createElement('input');
+    hiddenField.type = 'hidden';
+    hiddenField.name = 'username';
+    hiddenField.value = user;
+    form.appendChild(hiddenField);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
 //on load game start
 function startGame() { /* sets all the vars to their intitial vals*/
      questionCounter = 0;
@@ -478,14 +492,26 @@ function checkRight4(){
 
 var timer = document.getElementById('time');
 var timerID = setInterval(countDown, 1000);
-var current_time = 6 * 60;
+var current_time = 1 * 10;
 var min;
 var sec;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 function countDown(){
-    if (current_time <= 0)
+    if (current_time < 0)
         {
-            alert('Game Over');
+            user=document.getElementById("usernamedropdown").innerHTML
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/game3", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                username: user,
+                value: Math.round(score)
+            }));
+            sleep(1000);
+            redir("/scoresB");
         }
     else
         {
