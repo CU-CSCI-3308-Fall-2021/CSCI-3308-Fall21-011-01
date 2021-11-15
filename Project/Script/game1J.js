@@ -331,6 +331,26 @@ function draw() {
       }));
       first=false;
       /////add a creation of a retry button that reports the score(just shown here as value) and then does a redir('/boatGame') when you click retry
+      let newdiv = document.createElement("div");
+      newdiv.class = "container";
+      newdiv.class = "pt-4";
+      newdiv.id = "coolid";
+
+      newdiv.style.position = "fixed";
+      newdiv.style.top = "50%";
+      newdiv.style.left = "40%";
+
+      let btn = document.createElement("button");
+      btn.innerHTML = "RESTART";
+      btn.style.fontFamily = "verdana";
+      btn.style.fontSize = "50px";
+      btn.style.backgroundColor = "rgba(245, 1, 42, 0.6)";
+      btn.style.border = "rgba(245, 1, 42, 1)";
+      btn.onclick = function(){
+        redir('/boatGame');
+      };
+      document.body.appendChild(newdiv);
+      document.getElementById("coolid").appendChild(btn);
     }
   }
 }
