@@ -97,6 +97,7 @@ app.post('/scores', (req, res) => {
     let username=req.body.username;
     let sortby=req.body.sortby;
     let requested=req.body.want;
+
     if(sortby==undefined)
     {
         sortby="game1_score";
@@ -105,15 +106,18 @@ app.post('/scores', (req, res) => {
     {
         requested="5";
     }
+
     requested=parseInt(requested);
     var issuperuser = "SELECT COUNT(*) FROM user_table_better WHERE username='"+username+"' AND supervisor_variable = '1';";
     var highScores1 = "SELECT * FROM user_table_better ORDER BY reported_variable, "+sortby+" DESC;";
+
     db.task('get-everything', task => {
 		return task.batch([
 			task.any(highScores1),
             task.any(issuperuser)
 		]);
 	})
+    
     .then(data => {
         var supervise = data[1][0].count;
         var length = data[0].length;

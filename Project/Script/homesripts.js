@@ -1,3 +1,5 @@
+
+// so we can redirect with POST request in order to keep the current user logged in
 function redir(path, method='POST') {
     user=document.getElementById("usernamedropdown").innerHTML
     const form = document.createElement('form');
@@ -12,6 +14,7 @@ function redir(path, method='POST') {
     form.submit();
   }
 
+  // sends more information to the webpage so user can view a specified amount
   function sortBy(path, sortvar,want=5,method='POST') {
     user=document.getElementById("usernamedropdown").innerHTML
     const form = document.createElement('form');
@@ -36,6 +39,7 @@ function redir(path, method='POST') {
     form.submit();
   }
 
+  // calls sortBy with user inputted view they want
   function changeView(left, change=true)
   {
     maxsize=parseInt(document.getElementById("maxsize").innerHTML)
@@ -63,6 +67,7 @@ function redir(path, method='POST') {
     sortBy('/scores','game1_score',currsize);
   }
 
+  // for supervisor, makes it so you can alter  and refresh the webpage, toggles reported var in datbase
   function report(name)
   {
     var xhr = new XMLHttpRequest();
@@ -85,5 +90,16 @@ function redir(path, method='POST') {
         to: 0
     }));
     changeView(false,false)
+  }
+
+  function showtable(){
+    console.log("happen");
+    var table = document.getElementById("nerdtable");
+    
+    if(table.style.display == "block"){
+      table.style.display = "none";
+    }else{
+      table.style.display = "block";
+    }
   }
   
