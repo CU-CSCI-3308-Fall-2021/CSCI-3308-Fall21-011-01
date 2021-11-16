@@ -192,6 +192,7 @@ function nextLevel(){
 }
 
 function pushScores(){
+    user = document.getElementById("usernamedropdown").innerHTML;
     console.log("in push scores");
     var xhr = new XMLHttpRequest();
       xhr.open("POST", "/game2", true);
@@ -206,6 +207,7 @@ function pushScores(){
 function newGame(){
     gameScore = 0;
     Level = 1;
+    showGame('send-btn', 0);
     showGame('game', 1);
     showGame('next-btn', 0);
     showGame('contain', 1);

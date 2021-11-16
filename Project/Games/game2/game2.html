@@ -46,9 +46,70 @@
             height: 300px;
         } 
     </style>
+
 <title>
     Game 2
 </title>
+
+<body>
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg bluebg navbar-light">
+
+    <div class="collapse navbar-collapse" id="navbarText">
+
+     
+            <img class="bluebg rounded-circle"
+            src="../../resources/brain.png"
+            alt="website icon"
+            id="icon"
+            width="90px"
+            >
+
+
+        <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+          <a class="btn btn-default" type="button" onclick="redir('/home')">   Home   <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class = "nav-item">
+            <a class="btn btn-default" type="button" onclick="redir('/login')">  Log Out  <span class="sr-only">(current)</span></a>
+        </li>
+
+      </ul>
+
+       
+
+    </div>
+
+    
+    
+    
+    <div class="form-inline my-2 my-lg-0">
+        
+        <div class="dropdown">
+            
+            <button onclick="dropdownfunc()" class="btn btn-default">
+                <img class="rounded-circle" src="http://cdn.onlinewebfonts.com/svg/img_243887.png" alt="" width="30" height="30">
+            </button>
+            
+                <div id="myDropdown" class="dropdown-content" style="visibility: hidden;">
+                <a href="#" id="usernamedropdown"><%-user%></a>
+                <a href="#">Settings</a>
+                </div>
+
+        </div>
+
+    </div>
+
+  </div>
+
+
+</nav>
+
+<!--- END NAVBAR -->
+</body>
 
 <body onload="showGame('game', 0); showGame('next', 0); showGame('restart-btn', 0); showGame('send-btn', 0); showGame('newGame-btn', 0);">
     <h1>Game 2: Math Flashcards</h1>
@@ -94,7 +155,7 @@
 
     <p><button class="button buttonRestart" id="restart-btn" onclick="runGame()">Restart Level</button></p>
         <p align = "margin-right" id="next"><button class="button buttonNext" id="next-btn" onclick="nextLevel()">Next Level</button></p>
-        <p align = "margin-right" id="next"><button class="button buttonR" id="newGame-btn" onclick="newGame()">Restart</button></p>
+        <p align = "margin-right" id="next"><button class="button buttonR" id="newGame-btn" onclick="newGame()">New Game</button></p>
         <p align = "margin-right" id="next"><button class="button buttonSend" id="send-btn" onclick="pushScores()">Finish</button></p>
 
     <p>
