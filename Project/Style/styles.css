@@ -1,5 +1,7 @@
 
 
+ 
+
         .fortycol {
           width: 35%;
         }
@@ -197,4 +199,31 @@
             border: 1px solid green;
           }
 
-        
+        .bgimage{
+          background-image: url("../resources/mathbg3.jpg");
+        }
+
+        .coolborder{
+          border-style: solid;
+          border-width: 10px;
+          border-color: rgb(108, 136, 158);
+        }
+
+        .lowopacitybg{
+          background-color: rgb(243, 186, 112,0.5);
+        }
+
+        .dbluebg{
+          background-color: rgba(108, 136, 158,0.6);
+        }
+
+        .epicmathcenter{
+          margin-right: 37%;
+          width:30%;
+        }
+     
+        .bottomf{
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+        }
