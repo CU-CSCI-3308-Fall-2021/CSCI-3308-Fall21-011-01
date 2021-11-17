@@ -92,5 +92,9 @@
     color:#3a3d51;
 }
 
+table, tr, td{
+    border: 1px solid green;
+  }
+
 
 

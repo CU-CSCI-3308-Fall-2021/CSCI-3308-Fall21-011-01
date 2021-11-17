@@ -408,6 +408,13 @@ app.post('/boatGame', (req, res) => {  //to boat game
     });
 });
 
+app.post('/flashcards', (req,res) => {
+    let username=req.body.username;
+    res.render(__dirname + '/Views/game2.ejs',{
+        user: username
+    });
+});
+
 app.post('/riddles', (req, res) => {  //to riddle game
     let username=req.body.username;
     res.render(__dirname + '/Views/game33.ejs',{
