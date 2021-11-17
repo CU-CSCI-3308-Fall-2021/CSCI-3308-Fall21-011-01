@@ -202,12 +202,13 @@ function pushScores(){
           value: gameScore
       }));
       showGame('newGame-btn', 1);
+      showGame('send-btn', 0);
 }
 
 function newGame(){
     gameScore = 0;
     Level = 1;
-    showGame('send-btn', 0);
+    showGame('newGame-btn', 0);
     showGame('game', 1);
     showGame('next-btn', 0);
     showGame('contain', 1);
