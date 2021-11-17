@@ -94,6 +94,8 @@
 
     <!--- END NAVBAR -->
 
+    <div class="container smallpad"></div>
+
       <img src="../../resources/BESTBOATEVER.png" alt="ree", id='playerimage'  style="display: none;">
       <img src="../../resources/redbonx.png" alt="ree", id='rockimage' style="display: none;">
       <img src="../../resources/ice.png" alt="ree", id='iceimage' style="display: none;">
@@ -107,7 +109,7 @@
               name="input"
               id="input"
               autofocus="true"
-              placeholder=""
+              placeholder="Type Answer"
               autocomplete="off"
             />
           </div>
@@ -118,6 +120,10 @@
 
         
         <script src="../../Script/game1J.js"></script>
+        
+        <button class="buttonbg playbttn" type="button" id="playbttn" onclick="showgame()" style="font-size: 40px;">Play Game!</button>
+
         <canvas id="myCanvas" width="1000" height="750"style="border:1px solid #000000; background-image: url('../../resources/watergif3.gif')"></canvas>
+
     </body>
 </html>

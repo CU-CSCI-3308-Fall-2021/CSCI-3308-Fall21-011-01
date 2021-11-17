@@ -375,5 +375,11 @@ function drawcanvas()
   rxheight=rximage.height;
   console.log("rock height: " + rxheight);
   iceimage=document.getElementById('iceimage');
+  
+}
+
+function showgame(){
+  var bttn = document.getElementById("playbttn");
+  bttn.style.visibility = "hidden";
   draw();
 }

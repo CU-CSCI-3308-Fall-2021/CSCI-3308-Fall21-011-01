@@ -227,3 +227,10 @@
           bottom: 0;
           width: 100%;
         }
+
+        .playbttn{
+          position: fixed;
+          top : 50%;
+          left: 40%;
+
+        }
