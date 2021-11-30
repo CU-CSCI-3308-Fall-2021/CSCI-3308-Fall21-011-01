@@ -2,6 +2,7 @@ Project Description:
 Website for children to play games that help teach them simple mathematics. The website will consist of a login page, 3 different games (1 more visual and 2 more word-based games), and a stats page that serves as a leaderboard tpye of thing. 
 
 [Demo video link](https://youtu.be/KfM-W0fvDYM)
+
 [Heroku link](https://csmath.herokuapp.com/)
 
 Project Arcitecture:
