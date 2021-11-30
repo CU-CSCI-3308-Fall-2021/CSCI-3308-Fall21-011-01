@@ -24,6 +24,5 @@ The majority of our project is in the "Views" folder.
 It's where all of the ejs files are for the home, login, and all the games pages.
 Additionally, we have a style folder for our css pages.
 
-How to Build, Run, and Test Code:
-
+We built our code by creating a node js application which we ran through a docker container. We continually tested our code by running docker-compose and checking if our application would run and seeing if our database was connected to our website (for example, if the scores for each game would be submitted to the tables in our databse when we finished each game). 
 
