@@ -23,7 +23,6 @@ The tables that we reference in the server.js using sqlis stored in its own fold
 The majority of our project is in the "Views" folder.
 It's where all of the ejs files are for the home, login, and all the games pages.
 Additionally, we have a style folder for our css pages.
-The "node_modules" folder holds all of the 
 
 How to Build, Run, and Test Code:
 
