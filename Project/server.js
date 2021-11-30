@@ -28,6 +28,12 @@ const dbConfig = {
 	password: 'pwd'
 };
 
+const isProduction = process.env.NODE_ENV === 'production';
+const dbConfig = isProduction ? process.env.DATABASE_URL : dev_dbConfig;
+if (isProduction) {
+    pgp.pg.defaults.ssl = {rejectUnauthorized: false};
+  }
+
 var db = pgp(dbConfig);
 
 app.set('view engine', 'ejs');
@@ -423,5 +429,9 @@ app.post('/riddles', (req, res) => {  //to riddle game
 });
 
 
-app.listen(3000);
+//app.listen(3000);
+
+const server = app.listen(process.env.PORT || 3000, () => {
+    console.log(`Express running → PORT ${server.address().port}`);
+});
 
